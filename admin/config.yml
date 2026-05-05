@@ -1,0 +1,236 @@
+# =====================================================
+# Decap CMS 設定檔 — daoinsight
+# 中文操作介面 · 全部欄位中英對照
+# =====================================================
+
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: '新增 {{collection}} — "{{slug}}"'
+    update: '更新 {{collection}} — "{{slug}}"'
+    delete: '刪除 {{collection}} — "{{slug}}"'
+    uploadMedia: '上傳圖片 "{{path}}"'
+    deleteMedia: '刪除圖片 "{{path}}"'
+
+# 本地開發時可以開啟，正式環境關閉
+local_backend: false
+
+# 中文介面
+locale: 'zh_Hant'
+
+# 媒體（圖片）儲存位置
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# 編輯流程：開啟後文章會經過「草稿 → 待審 → 發佈」三階段
+publish_mode: editorial_workflow
+
+# 網站基本資訊
+site_url: https://daoinsight.netlify.app
+display_url: https://daoinsight.netlify.app
+logo_url: /assets/logo.png
+
+# =====================================================
+# 內容類別（Collections）
+# =====================================================
+collections:
+
+  # -------------------------------------------------
+  # 1. 文章
+  # -------------------------------------------------
+  - name: "articles"
+    label: "📝 文章"
+    label_singular: "文章"
+    folder: "content/articles"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title_zh}} · {{date}}"
+    sortable_fields: ['date', 'title_zh', 'category']
+    view_filters:
+      - label: "靈修札記"
+        field: category
+        pattern: "靈修札記"
+      - label: "聖經研究"
+        field: category
+        pattern: "聖經研究"
+      - label: "聖經導論"
+        field: category
+        pattern: "聖經導論"
+      - label: "神學思想"
+        field: category
+        pattern: "神學思想"
+    fields:
+      - { label: "中文標題", name: "title_zh", widget: "string" }
+      - { label: "英文標題 / English title", name: "title_en", widget: "string", required: false }
+      - { label: "發佈日期", name: "date", widget: "datetime", default: "" }
+      - label: "分類"
+        name: "category"
+        widget: "select"
+        options:
+          - "靈修札記"
+          - "聖經研究"
+          - "聖經導論"
+          - "神學思想"
+        default: "靈修札記"
+      - { label: "封面圖片", name: "cover", widget: "image", required: false, hint: "建議比例 16:9 或 4:5" }
+      - label: "封面氛圍（如果不上傳圖片）"
+        name: "cover_kind"
+        widget: "select"
+        required: false
+        options:
+          - { label: "晨光 Morning", value: "morning" }
+          - { label: "靜水 Calm", value: "calm" }
+          - { label: "窗景 Window", value: "window" }
+          - { label: "燭光 Candle", value: "candle" }
+          - { label: "暮色 Evening", value: "evening" }
+          - { label: "倦怠 Weariness", value: "weariness" }
+          - { label: "禱告 Prayer", value: "prayer" }
+          - { label: "懷疑 Doubt", value: "doubt" }
+          - { label: "安息 Sabbath", value: "sabbath" }
+        default: "morning"
+      - { label: "中文摘要", name: "excerpt_zh", widget: "text", hint: "1-2 句話，會顯示在文章卡片上" }
+      - { label: "英文摘要 / English excerpt", name: "excerpt_en", widget: "text", required: false }
+      - { label: "閱讀時間（分鐘）", name: "readtime", widget: "number", default: 6, min: 1, max: 60 }
+      - label: "中文內文"
+        name: "body_zh"
+        widget: "markdown"
+        hint: "支援 Markdown 格式。可用 **粗體**、*斜體*、> 引文、## 小標題"
+      - label: "英文內文 / English body"
+        name: "body_en"
+        widget: "markdown"
+        required: false
+      - { label: "金句（pull quote）", name: "pullquote_zh", widget: "string", required: false, hint: "會以大字突出顯示" }
+      - { label: "金句英文", name: "pullquote_en", widget: "string", required: false }
+
+  # -------------------------------------------------
+  # 2. 每日經文
+  # -------------------------------------------------
+  - name: "daily_verses"
+    label: "📖 每日經文"
+    label_singular: "每日經文"
+    folder: "content/daily-verses"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}"
+    summary: "{{date}} · {{ref_zh}}"
+    sortable_fields: ['date']
+    fields:
+      - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "經文出處（中文）", name: "ref_zh", widget: "string", hint: "例如：詩篇 46:10" }
+      - { label: "經文出處（英文）", name: "ref_en", widget: "string", hint: "例如：Psalm 46:10" }
+      - { label: "經文內容（中文）", name: "verse_zh", widget: "text" }
+      - { label: "經文內容（英文）", name: "verse_en", widget: "text" }
+      - { label: "默想（中文）", name: "reflection_zh", widget: "text", hint: "2-4 句話的默想引言" }
+      - { label: "默想（英文）", name: "reflection_en", widget: "text" }
+      - label: "氛圍配圖"
+        name: "img"
+        widget: "select"
+        options:
+          - { label: "晨光", value: "morning" }
+          - { label: "靜水", value: "calm" }
+          - { label: "窗景", value: "window" }
+          - { label: "燭光", value: "candle" }
+          - { label: "暮色", value: "evening" }
+        default: "morning"
+      - label: "默想題（每行一題，最多三題）"
+        name: "prompts_zh"
+        widget: "list"
+        required: false
+        max: 3
+      - label: "默想題（英文）"
+        name: "prompts_en"
+        widget: "list"
+        required: false
+        max: 3
+
+  # -------------------------------------------------
+  # 3. 聖經導論
+  # -------------------------------------------------
+  - name: "bible_intros"
+    label: "📚 聖經導論"
+    label_singular: "書卷導論"
+    folder: "content/bible-intros"
+    create: true
+    slug: "{{book_en}}"
+    summary: "№ {{order}} · {{book_zh}}"
+    sortable_fields: ['order']
+    fields:
+      - { label: "聖經順序（1-66）", name: "order", widget: "number", min: 1, max: 66, hint: "創世記=1，啟示錄=66" }
+      - { label: "中文書名", name: "book_zh", widget: "string" }
+      - { label: "英文書名", name: "book_en", widget: "string" }
+      - label: "分類"
+        name: "section"
+        widget: "select"
+        options:
+          - "律法書"
+          - "歷史書"
+          - "詩歌智慧書"
+          - "大先知書"
+          - "小先知書"
+          - "福音書"
+          - "使徒行傳"
+          - "保羅書信"
+          - "普通書信"
+          - "啟示錄"
+      - { label: "是否已發佈", name: "published", widget: "boolean", default: false, hint: "未勾選的書卷會顯示「即將推出」" }
+      - { label: "作者", name: "author", widget: "string", required: false, default: "Pastor Gary" }
+      - { label: "寫作年代", name: "era", widget: "string", required: false, hint: "例如：主前 1400 年" }
+      - { label: "簡介（中文）", name: "summary_zh", widget: "text", required: false }
+      - { label: "簡介（英文）", name: "summary_en", widget: "text", required: false }
+      - { label: "導論內文（中文）", name: "body_zh", widget: "markdown", required: false }
+      - { label: "導論內文（英文）", name: "body_en", widget: "markdown", required: false }
+
+  # -------------------------------------------------
+  # 4. 讀者見證
+  # -------------------------------------------------
+  - name: "testimonies"
+    label: "💬 讀者見證"
+    label_singular: "見證"
+    folder: "content/testimonies"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name_zh}} · {{role_zh}}"
+    fields:
+      - { label: "姓名（中文）", name: "name_zh", widget: "string" }
+      - { label: "姓名（英文）", name: "name_en", widget: "string" }
+      - { label: "身份（中文）", name: "role_zh", widget: "string", hint: "例如：設計師，台北" }
+      - { label: "身份（英文）", name: "role_en", widget: "string" }
+      - { label: "見證內容（中文）", name: "quote_zh", widget: "text" }
+      - { label: "見證內容（英文）", name: "quote_en", widget: "text" }
+      - { label: "顯示在首頁", name: "featured", widget: "boolean", default: true }
+      - { label: "順序", name: "order", widget: "number", default: 1, hint: "數字越小越前面" }
+
+  # -------------------------------------------------
+  # 5. 全站設定（單一檔案）
+  # -------------------------------------------------
+  - name: "settings"
+    label: "⚙️ 全站設定"
+    files:
+      - name: "site"
+        label: "網站基本資訊"
+        file: "content/settings/site.yml"
+        fields:
+          - { label: "網站名稱", name: "site_name", widget: "string", default: "daoinsight" }
+          - { label: "標語（中文）", name: "tagline_zh", widget: "string", default: "在忙碌生活中遇見神" }
+          - { label: "標語（英文）", name: "tagline_en", widget: "string", default: "Meeting God in a busy life" }
+          - { label: "Email", name: "email", widget: "string", default: "hello@daoinsight.com" }
+          - { label: "Instagram", name: "instagram", widget: "string", default: "dao.insight.pastorgary" }
+
+      - name: "home"
+        label: "🏠 首頁文字"
+        file: "content/settings/home.yml"
+        fields:
+          - { label: "Hero 副標（中文）", name: "hero_eyebrow_zh", widget: "string", default: "日日靈光 · 慢讀聖經" }
+          - { label: "Hero 副標（英文）", name: "hero_eyebrow_en", widget: "string", default: "Daily light · Slow scripture" }
+          - { label: "Hero 大標（中文）", name: "hero_title_zh", widget: "text", hint: "可換行；用 *斜體* 標記重點字" }
+          - { label: "Hero 大標（英文）", name: "hero_title_en", widget: "text" }
+          - { label: "Hero 介紹文字（中文）", name: "hero_sub_zh", widget: "text" }
+          - { label: "Hero 介紹文字（英文）", name: "hero_sub_en", widget: "text" }
+
+      - name: "about"
+        label: "👤 關於頁"
+        file: "content/settings/about.yml"
+        fields:
+          - { label: "Pastor Gary 簡介（中文）", name: "bio_zh", widget: "markdown" }
+          - { label: "Pastor Gary 簡介（英文）", name: "bio_en", widget: "markdown" }
+          - { label: "個人照", name: "photo", widget: "image", required: false }

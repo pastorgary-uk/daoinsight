@@ -1,0 +1,3385 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>daoinsight — Pastor Gary 的聖經慢讀空間</title>
+<link rel="icon" type="image/png" href="assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ===========================
+   daoinsight — Design System
+   現代簡約、攝影感、留白
+   =========================== */
+
+:root {
+  /* Brand */
+  --ink: #0E1116;            /* near-black for body text */
+  --ink-soft: #2A2F38;
+  --ink-mute: #5B6472;
+  --ink-faint: #9AA1AC;
+  --line: #E8E5DF;            /* warm hairline */
+  --line-soft: #F1EEE8;
+  --paper: #FAF7F1;           /* warm off-white background */
+  --paper-2: #F4EFE6;
+  --white: #FFFFFF;
+  --accent: #1E3A2B;          /* deep evergreen — quiet, sacred */
+  --accent-2: #C9A961;        /* aged brass — for verse marks */
+  --accent-soft: #E8EDE8;
+
+  /* Type */
+  --serif: "Cormorant Garamond", "Source Han Serif TC", "Noto Serif TC", "Songti TC", serif;
+  --serif-display: "Cormorant Garamond", "Source Han Serif TC", "Noto Serif TC", serif;
+  --sans: "Inter", "Noto Sans TC", -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
+
+  /* Scale */
+  --radius: 2px;
+  --radius-lg: 4px;
+  --shadow-sm: 0 1px 2px rgba(14,17,22,0.04);
+  --shadow: 0 8px 32px rgba(14,17,22,0.08);
+
+  /* Spacing rhythm (8pt) */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 48px;
+  --s6: 64px;
+  --s7: 96px;
+  --s8: 128px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* ===========================
+   Type system
+   =========================== */
+.serif { font-family: var(--serif); }
+.sans  { font-family: var(--sans); }
+.mono  { font-family: var(--mono); }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
+.display-xl {
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.display-l {
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.display-m {
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.body-l {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.body { font-size: 15px; line-height: 1.65; color: var(--ink-soft); }
+
+.caption {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Chinese serif tuning */
+:lang(zh), .zh {
+  font-family: var(--serif);
+  font-feature-settings: "palt";
+}
+
+/* ===========================
+   Layout primitives
+   =========================== */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--s4);
+}
+
+.container-narrow {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--s4);
+}
+
+.hairline { height: 1px; background: var(--line); border: 0; }
+.hairline-vertical { width: 1px; background: var(--line); }
+
+/* ===========================
+   Nav
+   =========================== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 247, 241, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--s4);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--serif-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.logo-mark {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  top: 1px;
+}
+.logo-mark::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: var(--accent-2);
+  border-radius: 50%;
+}
+.logo em { font-style: italic; color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: var(--s4);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  color: var(--ink-soft);
+  position: relative;
+  padding: 4px 0;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -22px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.lang-toggle {
+  display: flex;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  gap: 8px;
+  align-items: center;
+}
+.lang-toggle button { padding: 4px 6px; }
+.lang-toggle button.active { color: var(--ink); font-weight: 600; }
+.lang-toggle .sep { color: var(--ink-faint); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+
+.btn-solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-solid:hover { background: var(--accent); border-color: var(--accent); }
+
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+.btn-ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ===========================
+   Footer
+   =========================== */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: var(--s6) 0 var(--s4);
+  margin-top: var(--s7);
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--s4);
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--s5);
+}
+.footer h5 {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: var(--s2);
+  font-weight: 500;
+}
+.footer ul { list-style: none; }
+.footer li { margin-bottom: 10px; }
+.footer a { font-size: 14px; color: var(--ink-soft); }
+.footer a:hover { color: var(--ink); }
+.footer-tagline {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--ink);
+  max-width: 320px;
+}
+.footer-bottom {
+  max-width: 1280px;
+  margin: var(--s5) auto 0;
+  padding: var(--s3) var(--s4) 0;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink-mute);
+}
+
+/* ===========================
+   Utility
+   =========================== */
+.row { display: flex; }
+.col { display: flex; flex-direction: column; }
+.gap-s2 { gap: var(--s2); }
+.gap-s3 { gap: var(--s3); }
+.gap-s4 { gap: var(--s4); }
+.center { align-items: center; }
+.between { justify-content: space-between; }
+
+.fade-in { animation: fadeIn 0.6s ease both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* page-specific transitions */
+.page { animation: fadeIn 0.4s ease both; }
+
+/* ============================================================
+   daoinsight — Page-specific styles
+   ============================================================ */
+
+/* ===== HOME ===== */
+.hero {
+  position: relative;
+  padding: var(--s7) 0 var(--s7);
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--s6);
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--s3);
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: var(--accent-2);
+}
+.hero h1 {
+  font-family: var(--serif-display);
+  font-size: clamp(56px, 7vw, 104px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  color: var(--ink);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+  margin-top: var(--s3);
+  max-width: 480px;
+}
+.hero-cta { display: flex; gap: 12px; margin-top: var(--s4); }
+.hero-photo { aspect-ratio: 4/5; }
+
+.hero-stamp {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 96px;
+  height: 96px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-mute);
+  text-align: center;
+  line-height: 1.3;
+  background: rgba(255,255,255,0.5);
+}
+
+/* daily verse card on home */
+.verse-feature {
+  padding: var(--s6) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.verse-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--s6);
+  align-items: center;
+}
+.verse-feature .verse-img { aspect-ratio: 1/1.1; }
+.verse-feature .quote-mark {
+  font-family: var(--serif-display);
+  font-size: 80px;
+  line-height: 0.5;
+  color: var(--accent-2);
+  margin-bottom: var(--s2);
+}
+.verse-feature blockquote {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: var(--s3);
+}
+.verse-feature cite {
+  font-style: normal;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+
+/* sections */
+.section { padding: var(--s7) 0; }
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: var(--s5);
+  gap: var(--s3);
+}
+.section-head h2 { max-width: 720px; }
+
+/* article card */
+.article-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.article-card:hover { transform: translateY(-4px); }
+.article-card:hover .article-title { color: var(--accent); }
+.article-card .photo { margin-bottom: 4px; transition: transform 0.6s ease; }
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.article-meta .dot { color: var(--ink-faint); }
+.article-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.article-card.l .article-title { font-size: 38px; }
+.article-card.s .article-title { font-size: 20px; }
+.article-excerpt {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+/* article grid layouts */
+.article-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s5);
+}
+.article-grid-feature {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--s5);
+  align-items: start;
+}
+.article-grid-feature .secondary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+.article-grid-feature .secondary .article-card {
+  flex-direction: row;
+  align-items: start;
+  gap: 24px;
+}
+.article-grid-feature .secondary .article-card .photo {
+  width: 180px;
+  flex-shrink: 0;
+  aspect-ratio: 4/5;
+}
+
+/* Reading plans */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s4);
+}
+.plan-card {
+  position: relative;
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  transition: border-color 0.2s ease, transform 0.4s ease;
+  cursor: pointer;
+}
+.plan-card:hover { border-color: var(--ink); transform: translateY(-2px); }
+.plan-card .plan-num {
+  font-family: var(--serif-display);
+  font-size: 56px;
+  font-style: italic;
+  color: var(--accent-2);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.plan-card h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.plan-card p { color: var(--ink-mute); font-size: 14px; line-height: 1.55; flex-grow: 1; }
+.plan-card .plan-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--s3);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line-soft);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.plan-card .plan-cta .arrow { transition: transform 0.3s ease; }
+.plan-card:hover .plan-cta .arrow { transform: translateX(6px); }
+
+/* Topics chips */
+.topic-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.topic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink-soft);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.topic-chip:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.topic-chip .num {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-feature-settings: "tnum";
+}
+.topic-chip:hover .num { color: var(--paper); opacity: 0.7; }
+
+/* IG Feed */
+.ig-section { padding: var(--s7) 0; border-top: 1px solid var(--line); }
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-top: var(--s5);
+}
+.ig-tile {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--paper-2);
+}
+.ig-tile .ig-art {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+}
+.ig-tile .ig-art .verse {
+  font-family: var(--serif);
+  color: var(--white);
+  font-size: 20px;
+  line-height: 1.4;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  font-style: italic;
+}
+.ig-tile .ig-art .ref {
+  font-family: var(--sans);
+  color: var(--white);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 12px;
+  opacity: 0.9;
+}
+.ig-tile .ig-overlay {
+  position: absolute; inset: 0;
+  background: rgba(14,17,22,0.6);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: var(--white);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+.ig-tile:hover .ig-overlay { opacity: 1; }
+.ig-tile .meta-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 12px 16px;
+  display: flex; justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--sans);
+  letter-spacing: 0.04em;
+  background: linear-gradient(transparent, rgba(0,0,0,0.4));
+}
+
+/* Bible Intro page */
+.intro-page { padding: var(--s5) 0 var(--s7); }
+.intro-hero {
+  padding: var(--s6) 0 var(--s5);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s6);
+  text-align: center;
+}
+.intro-hero h1 { font-family: var(--serif-display); font-weight: 400; font-size: clamp(48px, 6vw, 88px); line-height: 1.05; letter-spacing: -0.02em; }
+.intro-hero h1 em { color: var(--accent); font-style: italic; }
+.intro-hero p { max-width: 580px; margin: 24px auto 0; font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--ink-mute); line-height: 1.55; }
+.intro-tab-bar {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-bottom: var(--s5);
+  border-bottom: 1px solid var(--line);
+}
+.intro-tab {
+  padding: 16px 4px;
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink-mute);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+.intro-tab:hover { color: var(--ink); }
+.intro-tab.active { color: var(--ink); }
+.intro-tab.active::after {
+  content: ""; position: absolute;
+  left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent);
+}
+.intro-tab .count {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.book-section { margin-bottom: var(--s6); }
+.intro-section { margin-bottom: var(--s6); }
+
+/* Series */
+.series-promo { padding: var(--s7) 0; border-top: 1px solid var(--line); }
+.series-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: var(--s5);
+}
+.series-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  text-decoration: none;
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.series-card:hover { border-color: var(--accent); }
+.series-card .series-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  align-self: flex-start;
+  border-radius: 999px;
+}
+.series-card .series-badge.ongoing { background: var(--accent-soft); color: var(--accent); }
+.series-card .series-badge.completed { background: var(--paper-2); color: var(--ink-mute); }
+.series-card .series-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+}
+.series-card .series-badge.ongoing .dot { animation: pulse 2s infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.series-card h3 {
+  font-family: var(--serif-display);
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+.series-card h3 em { color: var(--accent); font-style: italic; }
+.series-card .tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-mute);
+  line-height: 1.5;
+}
+.series-card .meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+.series-card .meta .arrow { font-size: 18px; color: var(--accent); }
+.series-card .progress {
+  height: 2px;
+  background: var(--line);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.series-card .progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.6s ease;
+}
+
+/* Series Page */
+.series-page-hero { padding: var(--s6) 0 var(--s5); border-bottom: 1px solid var(--line); margin-bottom: var(--s6); text-align: center; }
+.series-page-hero h1 { font-family: var(--serif-display); font-weight: 400; font-size: clamp(48px, 6vw, 88px); line-height: 1.05; letter-spacing: -0.02em; }
+.series-page-hero h1 em { color: var(--accent); font-style: italic; }
+.series-page-hero p { max-width: 580px; margin: 24px auto 0; font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--ink-mute); line-height: 1.55; }
+.series-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.series-detail {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  align-items: start;
+}
+.series-detail .visual {
+  aspect-ratio: 1/1;
+  background: var(--paper-2);
+  position: relative;
+  overflow: hidden;
+}
+.series-detail .body h2 {
+  font-family: var(--serif-display);
+  font-size: 44px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.series-detail .body h2 em { color: var(--accent); font-style: italic; }
+.series-detail .body .tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink-mute);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.series-detail .body p {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+.series-detail .stats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.series-detail .stats .stat .num {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 36px;
+  color: var(--accent);
+  line-height: 1;
+}
+.series-detail .stats .stat .lbl {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* Psalms weekly progress block on Intro page */
+.psalms-progress {
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--paper-2) 100%);
+  padding: 32px;
+  margin: var(--s5) 0;
+  border-left: 3px solid var(--accent);
+}
+.psalms-progress .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+.psalms-progress h3 {
+  font-family: var(--serif-display);
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 400;
+}
+.psalms-progress .progress-num {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--accent);
+}
+.psalms-progress .progress-num .total { color: var(--ink-faint); font-size: 18px; }
+.psalms-progress .bar {
+  height: 4px;
+  background: var(--white);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 12px 0 16px;
+}
+.psalms-progress .bar-fill { height: 100%; background: var(--accent); }
+.psalms-progress p { font-family: var(--serif); color: var(--ink-soft); line-height: 1.6; }
+
+@media (max-width: 980px) {
+  .series-grid { grid-template-columns: 1fr; }
+  .series-detail { grid-template-columns: 1fr; padding: 24px; }
+  .series-detail .visual { aspect-ratio: 16/9; }
+}
+
+/* Bible Intro promo on home */
+.intro-promo { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.intro-promo-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s6);
+  align-items: center;
+}
+.intro-promo-text h2 em { color: var(--accent); font-style: italic; }
+.intro-promo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.intro-promo-card {
+  background: var(--white);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  min-height: 130px;
+  justify-content: space-between;
+}
+.intro-promo-card:hover { background: var(--accent-soft); }
+.intro-promo-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.intro-promo-name {
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.intro-promo-en {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+@media (max-width: 980px) {
+  .intro-promo-inner { grid-template-columns: 1fr; }
+}.book-section h3 {
+  font-family: var(--serif-display);
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.book-section .section-sub {
+  font-size: 13px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--s3);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--line-soft);
+}
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.book-card {
+  background: var(--white);
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 92px;
+}
+.book-card:hover { background: var(--paper-2); }
+.book-card.published { background: var(--paper-2); }
+.book-card.published:hover { background: var(--accent-soft); }
+.book-card .book-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+.book-card .book-name {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+}
+.book-card .book-en {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+.book-card.published .book-name::after {
+  content: "•";
+  color: var(--accent);
+  margin-left: 6px;
+}
+.book-card .book-status {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: auto;
+}
+.book-card:not(.published) .book-status { color: var(--ink-faint); }
+@media (max-width: 980px) {
+  .ig-grid { grid-template-columns: repeat(2, 1fr); }
+  .book-grid { grid-template-columns: repeat(2, 1fr); }
+  .intro-tab-bar { gap: 16px; flex-wrap: wrap; }
+}
+
+/* Testimony block */
+.testimony-section {
+  background: var(--paper-2);
+  padding: var(--s7) 0;
+}
+.testimony-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s5);
+  margin-top: var(--s5);
+}
+.testimony-card blockquote {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 400;
+  margin-bottom: var(--s3);
+}
+.testimony-card blockquote::before {
+  content: "「";
+  font-family: var(--serif);
+  color: var(--accent-2);
+}
+.testimony-card blockquote::after {
+  content: "」";
+  font-family: var(--serif);
+  color: var(--accent-2);
+}
+.testimony-card.en blockquote::before { content: "\201C"; }
+.testimony-card.en blockquote::after { content: "\201D"; }
+.testimony-card .who {
+  font-size: 13px;
+  color: var(--ink-mute);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.testimony-card .who .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  color: var(--accent);
+  font-size: 16px;
+}
+
+/* Newsletter */
+.newsletter {
+  padding: var(--s7) 0;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+.newsletter-form {
+  margin-top: var(--s5);
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.newsletter-form input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  font-size: 14px;
+  font-family: var(--sans);
+  color: var(--ink);
+}
+.newsletter-form input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+.newsletter-thanks {
+  margin-top: var(--s4);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ===== TODAY (Daily Devotion) ===== */
+.today-page {
+  padding-top: var(--s5);
+  padding-bottom: var(--s7);
+}
+.today-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 70vh;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+.today-hero .image-side .photo { height: 100%; aspect-ratio: auto; }
+.today-hero .text-side {
+  padding: var(--s6) var(--s5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.today-date {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+.today-date .day {
+  font-family: var(--serif-display);
+  font-size: 64px;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+}
+.today-date .month-year { color: var(--ink-mute); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.today-verse-ref {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: var(--s3);
+}
+.today-verse {
+  font-family: var(--serif);
+  font-size: clamp(28px, 2.6vw, 38px);
+  line-height: 1.35;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin-bottom: var(--s4);
+}
+.today-verse .verse-num {
+  font-family: var(--serif);
+  font-size: 0.55em;
+  vertical-align: super;
+  color: var(--accent-2);
+  margin-right: 4px;
+}
+.today-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: var(--s4);
+}
+.today-action-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink-soft);
+  transition: all 0.2s ease;
+}
+.today-action-btn:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+.today-reflection {
+  margin-top: var(--s7);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--s5);
+}
+.today-reflection .label {
+  font-family: var(--serif-display);
+  font-size: 28px;
+  font-style: italic;
+  color: var(--accent);
+}
+.today-reflection .text {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 720px;
+}
+.today-reflection .text p + p { margin-top: 1em; }
+
+.today-prompts {
+  margin-top: var(--s6);
+  padding: var(--s5);
+  background: var(--paper-2);
+  border-radius: var(--radius);
+}
+.today-prompts h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; margin-bottom: var(--s3); }
+.today-prompts ol { padding-left: 0; list-style: none; counter-reset: pr; }
+.today-prompts li {
+  counter-increment: pr;
+  position: relative;
+  padding-left: 56px;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  padding-bottom: var(--s2);
+}
+.today-prompts li::before {
+  content: counter(pr, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 4px;
+  font-family: var(--serif-display);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--accent-2);
+  letter-spacing: 0.05em;
+}
+
+.today-week-strip {
+  margin-top: var(--s6);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.today-week-strip .day-cell {
+  background: var(--white);
+  padding: 18px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.today-week-strip .day-cell:hover { background: var(--paper-2); }
+.today-week-strip .day-cell.today { background: var(--ink); color: var(--paper); }
+.today-week-strip .day-cell .num { font-family: var(--serif); font-size: 22px; }
+.today-week-strip .day-cell .name { font-size: 11px; letter-spacing: 0.08em; color: var(--ink-mute); margin-top: 4px; text-transform: uppercase; }
+.today-week-strip .day-cell.today .name { color: var(--paper); opacity: 0.6; }
+
+/* ===== READ (Bible) ===== */
+.read-page { padding: var(--s5) 0 var(--s7); }
+.read-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 280px;
+  gap: var(--s5);
+  align-items: start;
+}
+.read-sidebar {
+  position: sticky;
+  top: 88px;
+  border-right: 1px solid var(--line);
+  padding-right: var(--s3);
+}
+.read-sidebar h4 {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.read-sidebar ul { list-style: none; margin-bottom: var(--s4); }
+.read-sidebar li {
+  padding: 6px 0;
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.read-sidebar li:hover { color: var(--ink); }
+.read-sidebar li.active { color: var(--accent); font-style: italic; }
+
+.read-search {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: var(--sans);
+  margin-bottom: var(--s3);
+  background: var(--white);
+}
+.read-search:focus { outline: none; border-color: var(--ink); }
+
+.read-content {
+  max-width: 660px;
+  margin: 0 auto;
+}
+.read-chapter-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--s3);
+  margin-bottom: var(--s4);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+.read-chapter-head h1 {
+  font-family: var(--serif-display);
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.read-chapter-head h1 em { font-style: italic; color: var(--accent); margin-left: 12px; }
+.read-chapter-head .version { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-mute); text-transform: uppercase; }
+
+.read-verse {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 36px;
+}
+.read-verse .vnum {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  font-family: var(--serif-display);
+  font-size: 13px;
+  color: var(--accent-2);
+  font-feature-settings: "tnum";
+  font-style: italic;
+}
+.read-verse.highlighted {
+  background: linear-gradient(transparent 50%, rgba(201,169,97,0.18) 50%);
+}
+
+.read-aside {
+  position: sticky;
+  top: 88px;
+  border-left: 1px solid var(--line);
+  padding-left: var(--s3);
+}
+.read-aside h4 {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.read-aside-card {
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.read-aside-card:last-child { border-bottom: 0; }
+.read-aside-card .ref { font-size: 11px; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+.read-aside-card p { font-family: var(--serif); font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+}
+.chapter-nav a {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--ink-mute);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.chapter-nav a:hover { color: var(--accent); }
+
+/* ===== LIBRARY ===== */
+.library-page { padding: var(--s5) 0 var(--s7); }
+.library-hero {
+  padding: var(--s6) 0 var(--s5);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s6);
+}
+.library-hero h1 { font-family: var(--serif-display); font-size: clamp(48px, 6vw, 88px); font-weight: 400; line-height: 1.02; letter-spacing: -0.02em; }
+.library-hero h1 em { color: var(--accent); font-style: italic; }
+.library-hero p { max-width: 540px; margin-top: var(--s3); font-size: 17px; color: var(--ink-mute); line-height: 1.6; }
+
+.library-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: var(--s5);
+  flex-wrap: wrap;
+}
+.library-filter {
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.library-filter:hover { border-color: var(--ink); }
+.library-filter.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ===== ARTICLE PAGE ===== */
+.article-page { padding-bottom: var(--s7); }
+.article-hero {
+  padding: var(--s6) 0 var(--s5);
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.article-hero .crumb {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s3);
+}
+.article-hero h1 {
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.article-hero .deck {
+  margin-top: var(--s3);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink-mute);
+  line-height: 1.45;
+}
+.article-hero .meta {
+  margin-top: var(--s4);
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+.article-hero .meta .sep { color: var(--ink-faint); }
+
+.article-body {
+  max-width: 660px;
+  margin: 0 auto;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.article-body p { margin-bottom: 1.4em; }
+.article-body p.lead {
+  font-size: 24px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.article-body .pull {
+  font-family: var(--serif-display);
+  font-size: 32px;
+  line-height: 1.3;
+  color: var(--accent);
+  font-style: italic;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: var(--s4) 0;
+  margin: var(--s5) 0;
+  letter-spacing: -0.01em;
+}
+.article-body h2 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  color: var(--ink);
+}
+.article-body blockquote {
+  border-left: 2px solid var(--accent-2);
+  padding-left: var(--s3);
+  margin: var(--s4) 0;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.article-feature-image { margin: var(--s5) 0; max-width: 880px; margin-left: auto; margin-right: auto; }
+
+/* ===== ABOUT ===== */
+.about-hero {
+  padding: var(--s7) 0 var(--s6);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.about-hero h1 {
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.about-hero h1 em { color: var(--accent); font-style: italic; }
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--s6);
+  align-items: start;
+  padding: var(--s6) 0;
+  border-top: 1px solid var(--line);
+}
+.about-section .label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent);
+}
+.about-section h2 {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: var(--s3);
+}
+.about-section p {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.about-section p + p { margin-top: 1em; }
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .hero-grid, .verse-feature-grid, .article-grid-feature, .today-hero, .read-layout, .about-section {
+    grid-template-columns: 1fr;
+    gap: var(--s4);
+  }
+  .article-grid-3, .plan-grid, .testimony-grid { grid-template-columns: 1fr; }
+  .article-grid-feature .secondary .article-card { flex-direction: column; }
+  .article-grid-feature .secondary .article-card .photo { width: 100%; }
+  .read-sidebar, .read-aside { position: static; border: 0; padding: 0; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/* ============================================================
+   daoinsight — Content (bilingual data)
+   ============================================================ */
+
+const CONTENT = {
+  // Daily verse rotation — 7 entries cycle by day
+  dailyVerses: [
+    {
+      ref_zh: "詩篇 46:10",
+      ref_en: "Psalm 46:10",
+      verse_zh: "你們要休息，要知道我是　神。",
+      verse_en: "Be still, and know that I am God.",
+      reflection_zh: "在無止境的提示音與待辦清單之間，神並不要求我們做更多——祂邀請我們先停下。今天，給自己一刻不被打擾的安靜。",
+      reflection_en: "Between endless notifications and to-do lists, God does not ask us to do more—He invites us to first stop. Give yourself one undisturbed quiet moment today.",
+      img: "calm",
+    },
+    {
+      ref_zh: "馬太福音 11:28",
+      ref_en: "Matthew 11:28",
+      verse_zh: "凡勞苦擔重擔的人都到我這裏來，我要使你們得安息。",
+      verse_en: "Come to me, all you who are weary and burdened, and I will give you rest.",
+      reflection_zh: "重擔不是失敗的證據，而是邀請的入口。耶穌沒有先問你的擔子有多重，祂只說：來。",
+      reflection_en: "Burdens are not proof of failure—they are the doorway of invitation. Jesus does not ask how heavy your load is. He simply says: come.",
+      img: "morning",
+    },
+    {
+      ref_zh: "腓立比書 4:6-7",
+      ref_en: "Philippians 4:6-7",
+      verse_zh: "應當一無掛慮，只要凡事藉着禱告、祈求和感謝，將你們所要的告訴　神。",
+      verse_en: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
+      reflection_zh: "焦慮是當代人最熟悉的呼吸節奏。保羅給的處方並不複雜：把你心裡那塊石頭，一塊一塊地，告訴神。",
+      reflection_en: "Anxiety has become the rhythm of modern breath. Paul's prescription is simple: take the stone in your heart, piece by piece, and tell it to God.",
+      img: "window",
+    },
+  ],
+
+  reading_plans: [
+    { id: "psalms-30", title_zh: "詩篇三十日", title_en: "Psalms in 30 Days", days: 30, accent: "morning",
+      desc_zh: "在最人性的詩歌裡，重新學習與神對話。", desc_en: "Relearn dialogue with God through the most human songs." },
+    { id: "john-21", title_zh: "走進約翰福音", title_en: "Into the Gospel of John", days: 21, accent: "evening",
+      desc_zh: "二十一日，跟著一位老使徒回望耶穌。", desc_en: "Twenty-one days following an old apostle looking back at Jesus." },
+    { id: "lectio-7", title_zh: "聖言誦讀入門", title_en: "Lectio Divina: A Beginner's Path", days: 7, accent: "candle",
+      desc_zh: "七天練習：慢讀、默想、禱告、靜息。", desc_en: "Seven days of slow reading, meditation, prayer, and rest." },
+  ],
+
+  articles: [
+    {
+      id: "weariness",
+      cat_zh: "靈修札記", cat_en: "Devotional",
+      title_zh: "當你疲倦的時候，神在哪裡？",
+      title_en: "Where Is God When You Are Tired?",
+      excerpt_zh: "從以利亞的羅騰樹，看身體與靈性的整全——疲倦不是信心不夠，而是身體誠實的禱告。",
+      excerpt_en: "From Elijah's broom tree to the integrity of body and soul: tiredness is not weak faith, but the body's most honest prayer.",
+      author_zh: "Pastor Gary", author_en: "Pastor Gary",
+      date: "2026.04.20",
+      readtime: 6,
+      img: "weariness",
+    },
+    {
+      id: "john-prologue",
+      cat_zh: "聖經研究", cat_en: "Bible Study",
+      title_zh: "約翰福音序言中的「道」：一個跨文化的釋義",
+      title_en: "The Logos in John's Prologue: A Cross-Cultural Reading",
+      excerpt_zh: "從希臘的 Logos、希伯來的 Dabar，到中文的「道」——三種傳統如何在約翰福音 1:1 相遇？",
+      excerpt_en: "Greek Logos, Hebrew Dabar, Chinese Dao—how three traditions converge in John 1:1.",
+      author_zh: "Pastor Gary", author_en: "Pastor Gary",
+      date: "2026.04.15",
+      readtime: 12,
+      img: "prayer",
+    },
+    {
+      id: "intro-psalms",
+      cat_zh: "聖經導論", cat_en: "Introduction",
+      title_zh: "進入詩篇之前，你需要知道的五件事",
+      title_en: "Five Things to Know Before You Enter the Psalms",
+      excerpt_zh: "詩篇不是一本詩集，而是一個會堂——它教你如何在神面前說真話。",
+      excerpt_en: "The Psalter is not an anthology but a sanctuary—it teaches you how to speak truthfully before God.",
+      author_zh: "Pastor Gary", author_en: "Pastor Gary",
+      date: "2026.04.08",
+      readtime: 9,
+      img: "doubt",
+    },
+    {
+      id: "sabbath",
+      cat_zh: "神學思想", cat_en: "Theology",
+      title_zh: "安息日神學：在效率主義時代的抵抗",
+      title_en: "A Theology of Sabbath: Resistance in the Age of Efficiency",
+      excerpt_zh: "從創世記到 Walter Brueggemann——安息日不是宗教義務，而是對「生產即價值」這個謊言的拒絕。",
+      excerpt_en: "From Genesis to Brueggemann: Sabbath is not religious duty, but a refusal of the lie that productivity equals worth.",
+      author_zh: "Pastor Gary", author_en: "Pastor Gary",
+      date: "2026.03.30",
+      readtime: 14,
+      img: "sabbath",
+    },
+  ],
+
+  testimonies: [
+    {
+      name_zh: "靜怡", name_en: "Jing-Yi",
+      role_zh: "設計師，台北", role_en: "Designer, Taipei",
+      quote_zh: "在地鐵上讀完今日的經文，那一刻我才意識到——原來我已經很久沒有真正深呼吸了。",
+      quote_en: "I finished today's verse on the subway, and only then realized—I had not truly taken a deep breath in a long time.",
+    },
+    {
+      name_zh: "建宏", name_en: "Jian-Hong",
+      role_zh: "工程師，新加坡", role_en: "Engineer, Singapore",
+      quote_zh: "Pastor Gary 寫的東西既有學術的厚度，又有牧者的溫度——這在中文世界裡很難得。",
+      quote_en: "Pastor Gary's writing has both academic depth and pastoral warmth—a rare combination in the Chinese-speaking church.",
+    },
+    {
+      name_zh: "Mei", name_en: "Mei",
+      role_zh: "母親、教師，香港", role_en: "Mother & teacher, Hong Kong",
+      quote_zh: "我把每日經文設成桌布，讓自己一打開電腦，先看到一句不是工作的話。",
+      quote_en: "I set the daily verse as my wallpaper—so the first thing I see when opening my laptop isn't work.",
+    },
+  ],
+
+  topics: [
+    { zh: "焦慮", en: "Anxiety" },
+    { zh: "盼望", en: "Hope" },
+    { zh: "饒恕", en: "Forgiveness" },
+    { zh: "苦難", en: "Suffering" },
+    { zh: "孤單", en: "Loneliness" },
+    { zh: "感恩", en: "Gratitude" },
+    { zh: "信任", en: "Trust" },
+    { zh: "呼召", en: "Calling" },
+  ],
+
+  // Instagram feed — sample posts mirroring @dao.insight.pastorgary
+  igPosts: [
+    { verse_zh: "你們要休息，要知道我是神。", verse_en: "Be still, and know that I am God.", ref: "Ps 46:10", bg: "calm",   likes: 312, days: 2 },
+    { verse_zh: "凡勞苦擔重擔的，到我這裡來。", verse_en: "Come to me, all who are weary.", ref: "Mt 11:28",  bg: "morning", likes: 428, days: 4 },
+    { verse_zh: "在曠野，神為祂的百姓擺設筵席。", verse_en: "He sets a table in the wilderness.", ref: "Ps 78:19", bg: "evening", likes: 256, days: 6 },
+    { verse_zh: "微小的聲音裡，有神。", verse_en: "In a still small voice—God.", ref: "1Ki 19:12", bg: "candle",  likes: 389, days: 8 },
+    { verse_zh: "祂的慈愛，每早晨都是新的。", verse_en: "His mercies are new every morning.", ref: "Lam 3:23", bg: "morning", likes: 511, days: 10 },
+    { verse_zh: "願你以恩典為年歲的冠冕。", verse_en: "You crown the year with bounty.", ref: "Ps 65:11", bg: "window", likes: 273, days: 12 },
+    { verse_zh: "信就是所望之事的實底。", verse_en: "Faith is the substance of things hoped for.", ref: "Heb 11:1", bg: "prayer", likes: 342, days: 14 },
+    { verse_zh: "我來了，是要叫他們得生命。", verse_en: "I came that they may have life.", ref: "Jn 10:10", bg: "doubt",   likes: 467, days: 16 },
+    { verse_zh: "不要怕，只要信。", verse_en: "Do not fear, only believe.", ref: "Mk 5:36", bg: "evening", likes: 598, days: 18 },
+  ],
+
+  // Bible Introduction — all 66 books
+  bibleBooks: {
+    OT: [
+      { sec_zh: "律法書 Torah", sec_en: "The Torah", books: [
+        { n:1, zh:"創世記", en:"Genesis", pub:true },
+        { n:2, zh:"出埃及記", en:"Exodus", pub:true },
+        { n:3, zh:"利未記", en:"Leviticus" },
+        { n:4, zh:"民數記", en:"Numbers" },
+        { n:5, zh:"申命記", en:"Deuteronomy" },
+      ]},
+      { sec_zh: "歷史書 Historical", sec_en: "Historical Books", books: [
+        { n:6, zh:"約書亞記", en:"Joshua" }, { n:7, zh:"士師記", en:"Judges", pub:true },
+        { n:8, zh:"路得記", en:"Ruth", pub:true }, { n:9, zh:"撒母耳記上", en:"1 Samuel" },
+        { n:10, zh:"撒母耳記下", en:"2 Samuel" }, { n:11, zh:"列王紀上", en:"1 Kings" },
+        { n:12, zh:"列王紀下", en:"2 Kings" }, { n:13, zh:"歷代志上", en:"1 Chronicles" },
+        { n:14, zh:"歷代志下", en:"2 Chronicles" }, { n:15, zh:"以斯拉記", en:"Ezra" },
+        { n:16, zh:"尼希米記", en:"Nehemiah" }, { n:17, zh:"以斯帖記", en:"Esther" },
+      ]},
+      { sec_zh: "詩歌智慧書 Poetry & Wisdom", sec_en: "Poetry & Wisdom", books: [
+        { n:18, zh:"約伯記", en:"Job", pub:true }, { n:19, zh:"詩篇", en:"Psalms", pub:true },
+        { n:20, zh:"箴言", en:"Proverbs", pub:true }, { n:21, zh:"傳道書", en:"Ecclesiastes", pub:true },
+        { n:22, zh:"雅歌", en:"Song of Songs" },
+      ]},
+      { sec_zh: "大先知書 Major Prophets", sec_en: "Major Prophets", books: [
+        { n:23, zh:"以賽亞書", en:"Isaiah", pub:true }, { n:24, zh:"耶利米書", en:"Jeremiah" },
+        { n:25, zh:"耶利米哀歌", en:"Lamentations" }, { n:26, zh:"以西結書", en:"Ezekiel" },
+        { n:27, zh:"但以理書", en:"Daniel", pub:true },
+      ]},
+      { sec_zh: "小先知書 Minor Prophets", sec_en: "Minor Prophets", books: [
+        { n:28, zh:"何西阿書", en:"Hosea" }, { n:29, zh:"約珥書", en:"Joel" },
+        { n:30, zh:"阿摩司書", en:"Amos" }, { n:31, zh:"俄巴底亞書", en:"Obadiah" },
+        { n:32, zh:"約拿書", en:"Jonah", pub:true }, { n:33, zh:"彌迦書", en:"Micah" },
+        { n:34, zh:"那鴻書", en:"Nahum" }, { n:35, zh:"哈巴谷書", en:"Habakkuk" },
+        { n:36, zh:"西番雅書", en:"Zephaniah" }, { n:37, zh:"哈該書", en:"Haggai" },
+        { n:38, zh:"撒迦利亞書", en:"Zechariah" }, { n:39, zh:"瑪拉基書", en:"Malachi" },
+      ]},
+    ],
+    NT: [
+      { sec_zh: "福音書 Gospels", sec_en: "The Gospels", books: [
+        { n:40, zh:"馬太福音", en:"Matthew", pub:true }, { n:41, zh:"馬可福音", en:"Mark", pub:true },
+        { n:42, zh:"路加福音", en:"Luke", pub:true }, { n:43, zh:"約翰福音", en:"John", pub:true },
+      ]},
+      { sec_zh: "歷史書 Acts", sec_en: "Acts", books: [
+        { n:44, zh:"使徒行傳", en:"Acts", pub:true },
+      ]},
+      { sec_zh: "保羅書信 Pauline Epistles", sec_en: "Pauline Epistles", books: [
+        { n:45, zh:"羅馬書", en:"Romans", pub:true }, { n:46, zh:"哥林多前書", en:"1 Corinthians", pub:true },
+        { n:47, zh:"哥林多後書", en:"2 Corinthians" }, { n:48, zh:"加拉太書", en:"Galatians", pub:true },
+        { n:49, zh:"以弗所書", en:"Ephesians", pub:true }, { n:50, zh:"腓立比書", en:"Philippians", pub:true },
+        { n:51, zh:"歌羅西書", en:"Colossians" }, { n:52, zh:"帖撒羅尼迦前書", en:"1 Thessalonians" },
+        { n:53, zh:"帖撒羅尼迦後書", en:"2 Thessalonians" }, { n:54, zh:"提摩太前書", en:"1 Timothy" },
+        { n:55, zh:"提摩太後書", en:"2 Timothy" }, { n:56, zh:"提多書", en:"Titus" },
+        { n:57, zh:"腓利門書", en:"Philemon" },
+      ]},
+      { sec_zh: "普通書信 General Epistles", sec_en: "General Epistles", books: [
+        { n:58, zh:"希伯來書", en:"Hebrews", pub:true }, { n:59, zh:"雅各書", en:"James", pub:true },
+        { n:60, zh:"彼得前書", en:"1 Peter" }, { n:61, zh:"彼得後書", en:"2 Peter" },
+        { n:62, zh:"約翰一書", en:"1 John" }, { n:63, zh:"約翰二書", en:"2 John" },
+        { n:64, zh:"約翰三書", en:"3 John" }, { n:65, zh:"猶大書", en:"Jude" },
+      ]},
+      { sec_zh: "啟示錄 Apocalypse", sec_en: "Apocalypse", books: [
+        { n:66, zh:"啟示錄", en:"Revelation", pub:true },
+      ]},
+    ],
+  },
+
+  // Content series (mirroring IG)
+  series: [
+    {
+      id: "exegesis-journey",
+      title_zh: "釋經之旅", title_en: "Exegesis Journey",
+      tagline_zh: "一卷一卷，慢慢走進經文裡面",
+      tagline_en: "Walking slowly into scripture, one book at a time",
+      format_zh: "圖文連載", format_en: "Illustrated essays",
+      status: "completed",
+      count: 24, total: 24,
+      img: "morning",
+      desc_zh: "從文本、歷史、神學三個角度，深入單卷書的釋經系列。每篇文章帶你看見經文背後的世界，再回到我們今天的處境。",
+      desc_en: "An exegetical series exploring single books through text, history, and theology—seeing the world behind the verse, then returning to our own.",
+    },
+    {
+      id: "ot-theology",
+      title_zh: "舊約神學初探", title_en: "OT Theology Primer",
+      tagline_zh: "用十分鐘，認識一個舊約大概念",
+      tagline_en: "One Old Testament concept in ten minutes",
+      format_zh: "Reels 短片 + 文字稿", format_en: "Reels + transcripts",
+      status: "completed",
+      count: 18, total: 18,
+      img: "candle",
+      desc_zh: "盟約、出埃及、聖殿、智慧⋯⋯舊約裡那些貫穿全書的大主題，用最日常的語言為你拆解。",
+      desc_en: "Covenant, exodus, temple, wisdom—the great threads of the Old Testament, unpacked in everyday language.",
+    },
+    {
+      id: "bible-characters",
+      title_zh: "聖經人物", title_en: "Bible Characters",
+      tagline_zh: "他們也曾真實活過、懷疑過、相信過",
+      tagline_en: "They lived, they doubted, they believed",
+      format_zh: "Reels 短片", format_en: "Reels",
+      status: "ongoing",
+      count: 12, total: null,
+      img: "weariness",
+      desc_zh: "從亞當、夏甲、雅各到馬利亞——聖經裡的人不是聖人雕像，他們是有血有肉的我們。每集一位人物，看見他們的人性，也看見神的恩典。",
+      desc_en: "From Adam to Hagar to Jacob to Mary—biblical figures are not statues, they are us. One episode, one person, one face of grace.",
+    },
+    {
+      id: "psalms-weekly",
+      title_zh: "每週詩篇", title_en: "Psalms Weekly",
+      tagline_zh: "一週一首詩篇，慢慢釋經",
+      tagline_en: "One Psalm a week, slowly read",
+      format_zh: "圖文週更", format_en: "Weekly essays",
+      status: "ongoing",
+      count: 12, total: 150,
+      img: "calm",
+      desc_zh: "從第一首詩篇開始，每週一首，逐字逐節釋經。預計三年完成全部 150 篇。歡迎跟著一起讀。",
+      desc_en: "Starting from Psalm 1, one psalm each week, line by line. A three-year journey through all 150. Walk with me.",
+    },
+  ],
+
+  ui: {
+    today: { zh: "今日經文", en: "Today's Verse" },    reflect: { zh: "默想", en: "Reflection" },
+    readMore: { zh: "繼續閱讀", en: "Read more" },
+    explore: { zh: "開始探索", en: "Begin exploring" },
+    listen: { zh: "聆聽", en: "Listen" },
+    save: { zh: "收藏", en: "Save" },
+    share: { zh: "分享", en: "Share" },
+    subscribe: { zh: "訂閱每日來信", en: "Subscribe to daily letter" },
+    enterEmail: { zh: "輸入你的電郵地址", en: "Enter your email" },
+    join: { zh: "加入", en: "Join" },
+    minutes: { zh: "分鐘", en: "min read" },
+    days: { zh: "日", en: "days" },
+    by: { zh: "作者", en: "by" },
+    allArticles: { zh: "全部文章", en: "All articles" },
+    readingPlans: { zh: "讀經計劃", en: "Reading plans" },
+    bibleSearch: { zh: "搜尋經文", en: "Search scripture" },
+    new: { zh: "新", en: "New" },
+  },
+};
+
+window.CONTENT = CONTENT;
+
+// helper getters
+window.bi = function (obj, lang, base) {
+  // returns obj[base + '_' + (lang==='en'?'en':'zh')]
+  const key = base + "_" + (lang === "en" ? "en" : "zh");
+  return obj[key];
+};
+
+window.t = function (lang, dict) {
+  return lang === "en" ? dict.en : dict.zh;
+};
+
+/* ============================================================
+   daoinsight — Shared Components & SVG Illustrations
+   ============================================================ */
+
+const { useState, useEffect, useRef, useMemo } = React;
+
+/* ----------------------------------------------------------
+   PhotoPlaceholder — abstract atmospheric SVG art
+   Acts as photography placeholder, with calm, sacred mood.
+   ---------------------------------------------------------- */
+function PhotoPlaceholder({ kind = "morning", aspect = "4/5", className = "", overlay = false }) {
+  const id = useMemo(() => "ph-" + Math.random().toString(36).slice(2, 8), []);
+
+  const scenes = {
+    morning: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#F0E6D2" />
+            <stop offset="55%" stopColor="#E4D4B5" />
+            <stop offset="100%" stopColor="#A89373" />
+          </linearGradient>
+          <radialGradient id={id + "-sun"} cx="0.7" cy="0.32" r="0.35">
+            <stop offset="0%" stopColor="#FFF4DA" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#FFF4DA" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        <rect width="800" height="1000" fill={`url(#${id}-sun)`} />
+        {/* horizon */}
+        <path d="M0 720 Q 200 680 400 700 T 800 690 L 800 1000 L 0 1000 Z" fill="#5C5037" opacity="0.55" />
+        <path d="M0 800 Q 250 760 500 790 T 800 780 L 800 1000 L 0 1000 Z" fill="#3D3424" opacity="0.7" />
+        {/* tree silhouette */}
+        <g opacity="0.85">
+          <rect x="120" y="540" width="3" height="180" fill="#2D2618" />
+          <ellipse cx="121" cy="540" rx="55" ry="38" fill="#2D2618" />
+        </g>
+        <circle cx="560" cy="320" r="60" fill="#FFF6E2" opacity="0.85" />
+      </>
+    ),
+    calm: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#E5E8E3" />
+            <stop offset="50%" stopColor="#D2D9D1" />
+            <stop offset="100%" stopColor="#9FA89E" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        {/* water ripples */}
+        <g stroke="#FFFFFF" strokeOpacity="0.35" fill="none" strokeWidth="1">
+          <ellipse cx="400" cy="700" rx="380" ry="22" />
+          <ellipse cx="400" cy="730" rx="320" ry="18" />
+          <ellipse cx="400" cy="760" rx="260" ry="14" />
+          <ellipse cx="400" cy="790" rx="200" ry="10" />
+        </g>
+        {/* mist mountains */}
+        <path d="M0 600 L 180 460 L 320 540 L 480 420 L 640 510 L 800 470 L 800 700 L 0 700 Z" fill="#7A857B" opacity="0.5" />
+        <path d="M0 660 L 200 580 L 380 620 L 560 560 L 720 600 L 800 590 L 800 720 L 0 720 Z" fill="#5D6960" opacity="0.55" />
+      </>
+    ),
+    window: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#F5EFE3" />
+            <stop offset="100%" stopColor="#D9CFB8" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        {/* window frame */}
+        <rect x="120" y="160" width="560" height="700" fill="#FFFAEF" stroke="#C2B393" strokeWidth="2" />
+        <line x1="400" y1="160" x2="400" y2="860" stroke="#C2B393" strokeWidth="2" />
+        <line x1="120" y1="510" x2="680" y2="510" stroke="#C2B393" strokeWidth="2" />
+        {/* light beams */}
+        <path d="M120 160 L 680 160 L 800 1000 L 0 1000 Z" fill="#FFF6E2" opacity="0.25" />
+        {/* outside */}
+        <rect x="125" y="165" width="270" height="340" fill="#B8C7B0" opacity="0.6" />
+        <rect x="405" y="165" width="270" height="340" fill="#B8C7B0" opacity="0.6" />
+        <rect x="125" y="515" width="270" height="340" fill="#9DAE94" opacity="0.55" />
+        <rect x="405" y="515" width="270" height="340" fill="#9DAE94" opacity="0.55" />
+        {/* plant on sill */}
+        <ellipse cx="200" cy="870" rx="35" ry="8" fill="#7A6748" />
+        <path d="M180 870 Q 175 820 200 800 Q 225 820 220 870 Z" fill="#5C7050" />
+      </>
+    ),
+    candle: (
+      <>
+        <defs>
+          <radialGradient id={id + "-bg"} cx="0.5" cy="0.35" r="0.7">
+            <stop offset="0%" stopColor="#3A2E1F" />
+            <stop offset="100%" stopColor="#0E0A05" />
+          </radialGradient>
+          <radialGradient id={id + "-glow"} cx="0.5" cy="0.4" r="0.25">
+            <stop offset="0%" stopColor="#FFD888" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#FFD888" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        <rect width="800" height="1000" fill={`url(#${id}-glow)`} />
+        {/* candle */}
+        <rect x="380" y="500" width="40" height="240" fill="#F0E6D0" />
+        <ellipse cx="400" cy="500" rx="20" ry="6" fill="#D9C9A8" />
+        <ellipse cx="400" cy="740" rx="20" ry="6" fill="#7A6A4A" />
+        {/* flame */}
+        <ellipse cx="400" cy="465" rx="12" ry="28" fill="#FFC85A" />
+        <ellipse cx="400" cy="470" rx="6" ry="18" fill="#FFF5C4" />
+        <line x1="400" y1="490" x2="400" y2="500" stroke="#3A2E1F" strokeWidth="2" />
+      </>
+    ),
+    evening: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#3D4A6B" />
+            <stop offset="50%" stopColor="#7A6280" />
+            <stop offset="100%" stopColor="#D89978" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        <circle cx="400" cy="780" r="80" fill="#FFD58A" opacity="0.95" />
+        <path d="M0 820 L 800 820 L 800 1000 L 0 1000 Z" fill="#2A2438" opacity="0.7" />
+        <path d="M0 850 Q 100 820 200 845 L 200 1000 L 0 1000 Z" fill="#1F1A2A" />
+      </>
+    ),
+    weariness: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#D9D2C4" />
+            <stop offset="100%" stopColor="#8C8475" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        {/* lone bench */}
+        <rect x="200" y="620" width="400" height="14" fill="#5C4A36" />
+        <rect x="220" y="634" width="10" height="120" fill="#5C4A36" />
+        <rect x="570" y="634" width="10" height="120" fill="#5C4A36" />
+        <rect x="200" y="600" width="400" height="14" fill="#6B5740" />
+        {/* long shadow */}
+        <ellipse cx="400" cy="810" rx="280" ry="20" fill="#3A3328" opacity="0.4" />
+      </>
+    ),
+    prayer: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1F2A38" />
+            <stop offset="100%" stopColor="#070B12" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        {/* stars */}
+        <g fill="#FFFFFF">
+          <circle cx="120" cy="180" r="1.5" opacity="0.8" />
+          <circle cx="240" cy="120" r="1" opacity="0.6" />
+          <circle cx="380" cy="200" r="2" opacity="0.9" />
+          <circle cx="500" cy="140" r="1.2" opacity="0.7" />
+          <circle cx="640" cy="180" r="1.5" opacity="0.8" />
+          <circle cx="700" cy="280" r="1" opacity="0.5" />
+          <circle cx="180" cy="260" r="1" opacity="0.5" />
+          <circle cx="450" cy="280" r="1.5" opacity="0.7" />
+        </g>
+        {/* moon */}
+        <circle cx="600" cy="220" r="55" fill="#F2EAD3" opacity="0.95" />
+        <circle cx="585" cy="210" r="55" fill="#1F2A38" />
+        {/* mountain horizon */}
+        <path d="M0 720 L 200 600 L 380 680 L 560 580 L 800 660 L 800 1000 L 0 1000 Z" fill="#0A0E15" />
+      </>
+    ),
+    doubt: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#E8E2D2" />
+            <stop offset="100%" stopColor="#B8AE94" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        {/* fog layers */}
+        <path d="M0 480 Q 200 440 400 470 T 800 450 L 800 1000 L 0 1000 Z" fill="#FFFFFF" opacity="0.3" />
+        <path d="M0 600 Q 200 560 400 590 T 800 570 L 800 1000 L 0 1000 Z" fill="#FFFFFF" opacity="0.25" />
+        {/* path */}
+        <path d="M380 1000 Q 400 800 420 700 Q 410 620 400 560" stroke="#7A6F55" strokeWidth="3" fill="none" opacity="0.6" strokeDasharray="6 8" />
+      </>
+    ),
+    sabbath: (
+      <>
+        <defs>
+          <linearGradient id={id + "-bg"} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#F7F1E1" />
+            <stop offset="100%" stopColor="#D9C9A8" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1000" fill={`url(#${id}-bg)`} />
+        {/* book */}
+        <g transform="translate(180, 480)">
+          <path d="M0 80 L 220 60 L 220 240 L 0 260 Z" fill="#FFFAEC" stroke="#A8987A" strokeWidth="1" />
+          <path d="M220 60 L 440 80 L 440 260 L 220 240 Z" fill="#FFFAEC" stroke="#A8987A" strokeWidth="1" />
+          <path d="M220 60 L 220 240" stroke="#A8987A" strokeWidth="1" />
+          {/* lines */}
+          <g stroke="#C8B89A" strokeWidth="1">
+            <line x1="20" y1="110" x2="200" y2="95" />
+            <line x1="20" y1="135" x2="200" y2="120" />
+            <line x1="20" y1="160" x2="180" y2="145" />
+            <line x1="240" y1="100" x2="420" y2="115" />
+            <line x1="240" y1="125" x2="420" y2="140" />
+            <line x1="240" y1="150" x2="400" y2="165" />
+          </g>
+        </g>
+      </>
+    ),
+  };
+
+  return (
+    <div className={"photo " + className} style={{ aspectRatio: aspect, position: "relative", overflow: "hidden", borderRadius: "var(--radius)" }}>
+      <svg viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" style={{ display: "block" }}>
+        {scenes[kind] || scenes.morning}
+      </svg>
+      {overlay && <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(14,17,22,0.55), rgba(14,17,22,0.05) 60%)" }} />}
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   Logo
+   ---------------------------------------------------------- */
+function Logo() {
+  return (
+    <a href="#/" className="logo" data-route="home" style={{display:"flex", alignItems:"center", gap:10, textDecoration:"none"}}>
+      <img src="assets/logo.png" alt="daoinsight" style={{width:36, height:36, objectFit:"contain"}} />
+      <span style={{fontFamily:"var(--serif-display)", fontSize:22, letterSpacing:"-0.01em", color:"var(--ink)"}}>
+        dao<em style={{fontStyle:"italic", color:"var(--accent)"}}>insight</em>
+      </span>
+    </a>
+  );
+}
+
+/* ----------------------------------------------------------
+   Nav
+   ---------------------------------------------------------- */
+function Nav({ route, lang, setLang, navigate }) {
+  const items = [
+    { id: "home",    zh: "首頁",     en: "Home" },
+    { id: "today",   zh: "今日靈修", en: "Today" },
+    { id: "read",    zh: "讀經",     en: "Read" },
+    { id: "intro",   zh: "聖經導論", en: "Intro" },
+    { id: "series",  zh: "系列",     en: "Series" },
+    { id: "library", zh: "文章",     en: "Library" },
+    { id: "about",   zh: "關於",     en: "About" },
+  ];
+  return (
+    <nav className="nav">
+      <div className="nav-inner">
+        <Logo />
+        <ul className="nav-links">
+          {items.map(it => (
+            <li key={it.id}>
+              <a
+                href={"#/" + it.id}
+                className={route === it.id ? "active" : ""}
+                onClick={(e) => { e.preventDefault(); navigate(it.id); }}
+              >{lang === "en" ? it.en : it.zh}</a>
+            </li>
+          ))}
+        </ul>
+        <div className="nav-right">
+          <div className="lang-toggle">
+            <button className={lang === "zh" ? "active" : ""} onClick={() => setLang("zh")}>中</button>
+            <span className="sep">·</span>
+            <button className={lang === "en" ? "active" : ""} onClick={() => setLang("en")}>EN</button>
+          </div>
+          <a href="#/today" onClick={(e)=>{e.preventDefault();navigate("today");}} className="btn btn-solid">
+            {t(lang, { zh: "今日經文", en: "Today's Verse" })}
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+/* ----------------------------------------------------------
+   Footer
+   ---------------------------------------------------------- */
+function Footer({ lang, navigate }) {
+  return (
+    <footer className="footer">
+      <div className="footer-inner">
+        <div>
+          <div className="footer-tagline serif">
+            {t(lang, {
+              zh: "陪你慢慢讀聖經。\n— Pastor Gary",
+              en: "Reading scripture with you, slowly.\n— Pastor Gary",
+            })}
+          </div>
+          <div style={{ marginTop: 24, color: "var(--ink-mute)", fontSize: 13 }}>
+            <a href="https://www.instagram.com/dao.insight.pastorgary" target="_blank" rel="noopener">@dao.insight.pastorgary</a>
+            <span style={{ margin: "0 12px" }}>·</span>
+            <a href="#">Email</a>
+            <span style={{ margin: "0 12px" }}>·</span>
+            <a href="#">RSS</a>
+          </div>
+        </div>
+        <div>
+          <h5>{t(lang, { zh: "探索", en: "Explore" })}</h5>
+          <ul>
+            <li><a href="#/today" onClick={(e)=>{e.preventDefault();navigate("today");}}>{t(lang, { zh: "今日靈修", en: "Today" })}</a></li>
+            <li><a href="#/read"  onClick={(e)=>{e.preventDefault();navigate("read");}}>{t(lang, { zh: "讀經", en: "Read scripture" })}</a></li>
+            <li><a href="#/intro" onClick={(e)=>{e.preventDefault();navigate("intro");}}>{t(lang, { zh: "聖經導論", en: "Bible introduction" })}</a></li>
+            <li><a href="#/library" onClick={(e)=>{e.preventDefault();navigate("library");}}>{t(lang, { zh: "文章", en: "Articles" })}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>{t(lang, { zh: "主題", en: "Topics" })}</h5>
+          <ul>
+            {CONTENT.topics.slice(0, 5).map((t, i) => (
+              <li key={i}><a href="#">{lang === "en" ? t.en : t.zh}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h5>{t(lang, { zh: "關於", en: "About" })}</h5>
+          <ul>
+            <li><a href="#/about" onClick={(e)=>{e.preventDefault();navigate("about");}}>{t(lang, { zh: "我們的故事", en: "Our story" })}</a></li>
+            <li><a href="#">{t(lang, { zh: "聯絡我們", en: "Contact" })}</a></li>
+            <li><a href="#">{t(lang, { zh: "支持事工", en: "Support" })}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <span>© 2026 daoinsight</span>
+        <span>{t(lang, { zh: "願恩典與你同在。", en: "Grace be with you." })}</span>
+      </div>
+    </footer>
+  );
+}
+
+/* ----------------------------------------------------------
+   ArticleCard
+   ---------------------------------------------------------- */
+function ArticleCard({ article, lang, navigate, size = "m" }) {
+  const title = bi(article, lang, "title");
+  const excerpt = bi(article, lang, "excerpt");
+  const cat = bi(article, lang, "cat");
+  const author = bi(article, lang, "author");
+
+  return (
+    <a className={"article-card " + size} href={"#/article/" + article.id}
+       onClick={(e)=>{e.preventDefault();navigate("article", article.id);}}>
+      <PhotoPlaceholder kind={article.img} aspect={size === "l" ? "16/10" : "4/5"} />
+      <div className="article-meta">
+        <span className="eyebrow">{cat}</span>
+        <span className="dot">·</span>
+        <span className="caption tnum">{article.date}</span>
+      </div>
+      <h3 className={"article-title serif " + (size === "l" ? "display-m" : "")}>{title}</h3>
+      <p className="article-excerpt body">{excerpt}</p>
+      <div className="article-footer">
+        <span className="caption">{t(lang, CONTENT.ui.by)} · {author}</span>
+        <span className="caption tnum">{article.readtime} {t(lang, CONTENT.ui.minutes)}</span>
+      </div>
+    </a>
+  );
+}
+
+/* ----------------------------------------------------------
+   Newsletter Block
+   ---------------------------------------------------------- */
+function Newsletter({ lang }) {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  return (
+    <section className="newsletter">
+      <div className="container-narrow newsletter-inner">
+        <div className="eyebrow">{t(lang, { zh: "每日來信", en: "Daily letter" })}</div>
+        <h2 className="display-l serif" style={{ marginTop: 16 }}>
+          {t(lang, {
+            zh: "讓一句經文，先於你的待辦清單。",
+            en: "Let one verse arrive before your to-do list.",
+          })}
+        </h2>
+        <p className="body-l" style={{ marginTop: 20, color: "var(--ink-mute)" }}>
+          {t(lang, {
+            zh: "每天清晨六點，一段經文、一段默想，輕輕地，送到你的信箱。",
+            en: "Each morning at six: one verse, one reflection — quietly, in your inbox.",
+          })}
+        </p>
+        {!submitted ? (
+          <form className="newsletter-form" onSubmit={(e)=>{e.preventDefault();if(email) setSubmitted(true);}}>
+            <input
+              type="email"
+              placeholder={t(lang, CONTENT.ui.enterEmail)}
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
+              required
+            />
+            <button className="btn btn-solid" type="submit">{t(lang, CONTENT.ui.join)}</button>
+          </form>
+        ) : (
+          <div className="newsletter-thanks serif">
+            {t(lang, { zh: "謝謝你。明早六點，信會抵達。", en: "Thank you. The letter will arrive tomorrow at six." })}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { PhotoPlaceholder, Logo, Nav, Footer, ArticleCard, Newsletter });
+
+/* ============================================================
+   daoinsight — Pages
+   ============================================================ */
+
+const { useState: _us, useEffect: _ue, useRef: _ur } = React;
+
+/* ----------------------------------------------------------
+   HOME
+   ---------------------------------------------------------- */
+function HomePage({ lang, navigate }) {
+  const verse = CONTENT.dailyVerses[0];
+  const featured = CONTENT.articles[0];
+  const others = CONTENT.articles.slice(1, 3);
+
+  return (
+    <div className="page">
+      {/* HERO */}
+      <section className="hero">
+        <div className="container">
+          <div className="hero-stamp">
+            {t(lang, {
+              zh: <>April<br/>MMXXVI</>,
+              en: <>April<br/>MMXXVI</>,
+            })}
+          </div>
+          <div className="hero-grid">
+            <div>
+              <div className="hero-eyebrow eyebrow">
+                {t(lang, { zh: "日日靈光 · 慢讀聖經", en: "Daily light · Slow scripture" })}
+              </div>
+              <h1>
+                {t(lang, {
+                  zh: <>在忙碌的<br/><em>生活之間</em>，<br/>遇見神。</>,
+                  en: <>Meeting God<br/><em>between</em><br/>busy days.</>,
+                })}
+              </h1>
+              <p className="hero-sub">
+                {t(lang, {
+                  zh: "daoinsight 是 Pastor Gary 開設的慢讀空間。每天一段經文、一篇有靈修溫度與學術深度的文字，陪你重新打開聖經。",
+                  en: "daoinsight is a slow reading space by Pastor Gary. Each day, one verse and one piece of writing — pastoral in tone, scholarly in depth — to help you open scripture again.",
+                })}
+              </p>
+              <div className="hero-cta">
+                <a href="#/today" onClick={(e)=>{e.preventDefault();navigate("today");}} className="btn btn-solid">
+                  {t(lang, { zh: "開始今天的閱讀", en: "Start today's reading" })}
+                  <span style={{marginLeft:4}}>→</span>
+                </a>
+                <a href="#/about" onClick={(e)=>{e.preventDefault();navigate("about");}} className="btn">
+                  {t(lang, { zh: "我們的故事", en: "Our story" })}
+                </a>
+              </div>
+            </div>
+            <PhotoPlaceholder kind="morning" aspect="4/5" className="hero-photo" />
+          </div>
+        </div>
+      </section>
+
+      {/* DAILY VERSE FEATURE */}
+      <section className="verse-feature">
+        <div className="container">
+          <div className="verse-feature-grid">
+            <PhotoPlaceholder kind={verse.img} aspect="1/1.1" className="verse-img" />
+            <div>
+              <div className="eyebrow" style={{marginBottom:24}}>
+                {t(lang, CONTENT.ui.today)} · 28 April 2026
+              </div>
+              <div className="quote-mark">"</div>
+              <blockquote>
+                {bi(verse, lang, "verse")}
+              </blockquote>
+              <cite>— {bi(verse, lang, "ref")} · {t(lang, { zh: "和合本修訂版", en: "RCUV" })}</cite>
+              <p style={{marginTop: 32, fontFamily:"var(--serif)", fontSize:18, lineHeight:1.6, color:"var(--ink-soft)"}}>
+                {bi(verse, lang, "reflection")}
+              </p>
+              <div style={{marginTop: 32}}>
+                <a href="#/today" onClick={(e)=>{e.preventDefault();navigate("today");}} className="btn">
+                  {t(lang, { zh: "進入今天的默想", en: "Enter today's reflection" })} →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED ARTICLES */}
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow" style={{marginBottom: 12}}>
+                {t(lang, { zh: "最新文章", en: "Recent writing" })}
+              </div>
+              <h2 className="display-l serif">
+                {t(lang, {
+                  zh: "對你的生活，說一句真話。",
+                  en: "A true word, into your life.",
+                })}
+              </h2>
+            </div>
+            <a href="#/library" onClick={(e)=>{e.preventDefault();navigate("library");}} className="btn btn-ghost">
+              {t(lang, CONTENT.ui.allArticles)} →
+            </a>
+          </div>
+
+          <div className="article-grid-feature">
+            <ArticleCard article={featured} lang={lang} navigate={navigate} size="l" />
+            <div className="secondary">
+              {others.map(a => <ArticleCard key={a.id} article={a} lang={lang} navigate={navigate} size="s" />)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* READING PLANS */}
+      <section className="section" style={{background: "var(--paper-2)"}}>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow" style={{marginBottom: 12}}>
+                {t(lang, CONTENT.ui.readingPlans)}
+              </div>
+              <h2 className="display-l serif">
+                {t(lang, {
+                  zh: "陪你走一段，慢慢讀。",
+                  en: "Walk with you, slowly read.",
+                })}
+              </h2>
+            </div>
+          </div>
+          <div className="plan-grid">
+            {CONTENT.reading_plans.map((p, i) => (
+              <div className="plan-card" key={p.id} onClick={()=>navigate("read")}>
+                <div className="plan-num">{String(i+1).padStart(2,"0")}</div>
+                <div className="caption" style={{letterSpacing:"0.08em", textTransform:"uppercase", color:"var(--ink-mute)"}}>
+                  {p.days} {t(lang, CONTENT.ui.days)}
+                </div>
+                <h3>{bi(p, lang, "title")}</h3>
+                <p>{bi(p, lang, "desc")}</p>
+                <div className="plan-cta">
+                  <span>{t(lang, { zh: "開始計劃", en: "Begin plan" })}</span>
+                  <span className="arrow">→</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SERIES PROMO */}
+      <section className="series-promo">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow" style={{marginBottom: 12}}>
+                {t(lang, { zh: "系列 · Series", en: "Series" })}
+              </div>
+              <h2 className="display-l serif">
+                {t(lang, { zh: "四個系列，慢慢讀。", en: "Four series, slowly read." })}
+              </h2>
+            </div>
+            <a href="#/series" onClick={(e)=>{e.preventDefault();navigate("series");}} className="btn btn-ghost">
+              {t(lang, { zh: "全部系列", en: "All series" })} →
+            </a>
+          </div>
+          <div className="series-grid">
+            {CONTENT.series.map((s, i) => (
+              <a key={s.id} href="#/series" onClick={(e)=>{e.preventDefault();navigate("series");}} className="series-card">
+                <span className={"series-badge " + s.status}>
+                  <span className="dot"></span>
+                  {s.status === "ongoing"
+                    ? t(lang, { zh: "連載中", en: "Ongoing" })
+                    : t(lang, { zh: "已完結", en: "Completed" })}
+                </span>
+                <h3>{bi(s, lang, "title")}</h3>
+                <div className="tagline">「{bi(s, lang, "tagline")}」</div>
+                {s.total && (
+                  <div className="progress">
+                    <div className="progress-fill" style={{width: (s.count/s.total*100)+"%"}}></div>
+                  </div>
+                )}
+                <div className="meta">
+                  <span>
+                    {bi(s, lang, "format")}
+                    <span style={{margin:"0 8px", color:"var(--ink-faint)"}}>·</span>
+                    {s.total ? `${s.count}/${s.total}` : `${s.count} ${t(lang, { zh:"集", en:"eps" })}`}
+                  </span>
+                  <span className="arrow">→</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BIBLE INTRO PROMO */}
+      <section className="section intro-promo">
+        <div className="container">
+          <div className="intro-promo-inner">
+            <div className="intro-promo-text">
+              <div className="eyebrow" style={{marginBottom: 16}}>
+                {t(lang, { zh: "聖經導論 · 66 卷", en: "Bible Introduction · 66 Books" })}
+              </div>
+              <h2 className="display-l serif" style={{marginBottom: 24}}>
+                {t(lang, {
+                  zh: <>進入一卷書之前，<br/>先<em>認識它</em>。</>,
+                  en: <>Before entering a book,<br/><em>meet it</em> first.</>,
+                })}
+              </h2>
+              <p style={{fontFamily:"var(--serif)", fontSize:19, lineHeight:1.65, color:"var(--ink-soft)", maxWidth:480, marginBottom: 32}}>
+                {t(lang, {
+                  zh: "六十六卷書，每一卷都有自己的時代、結構與聲音。我們為每一卷書預備一篇 8–10 分鐘的導論，幫助你讀得更深、更有方向。",
+                  en: "Sixty-six books, each with its own era, structure, and voice. We prepare an 8–10 minute introduction for each book, so you can read more deeply, with direction.",
+                })}
+              </p>
+              <div style={{display:"flex", gap:32, marginBottom: 32}}>
+                <div>
+                  <div style={{fontFamily:"var(--serif-display)", fontStyle:"italic", fontSize:48, color:"var(--accent)", lineHeight:1}}>11</div>
+                  <div className="caption" style={{marginTop:8}}>{t(lang, { zh: "篇導論已發佈", en: "Published" })}</div>
+                </div>
+                <div style={{width:1, background:"var(--line)"}}></div>
+                <div>
+                  <div style={{fontFamily:"var(--serif-display)", fontStyle:"italic", fontSize:48, color:"var(--ink-faint)", lineHeight:1}}>55</div>
+                  <div className="caption" style={{marginTop:8}}>{t(lang, { zh: "篇撰寫中", en: "In progress" })}</div>
+                </div>
+              </div>
+              <a href="#/intro" onClick={(e)=>{e.preventDefault();navigate("intro");}} className="btn btn-solid">
+                {t(lang, { zh: "瀏覽全部 66 卷", en: "Browse all 66 books" })} →
+              </a>
+            </div>
+            <div className="intro-promo-grid">
+              {[
+                { n:"01", zh:"創世記", en:"Genesis" },
+                { n:"19", zh:"詩篇", en:"Psalms" },
+                { n:"23", zh:"以賽亞書", en:"Isaiah" },
+                { n:"43", zh:"約翰福音", en:"John" },
+                { n:"45", zh:"羅馬書", en:"Romans" },
+                { n:"66", zh:"啟示錄", en:"Revelation" },
+              ].map((b, i) => (
+                <a key={i} href="#/intro" onClick={(e)=>{e.preventDefault();navigate("intro");}} className="intro-promo-card">
+                  <div className="intro-promo-num">№ {b.n}</div>
+                  <div className="intro-promo-name serif">{lang==="en"?b.en:b.zh}</div>
+                  <div className="intro-promo-en">{lang==="en"?"":b.en}</div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TOPICS */}
+      <section className="section">
+        <div className="container-narrow" style={{textAlign:"center"}}>
+          <div className="eyebrow" style={{marginBottom: 16}}>
+            {t(lang, { zh: "從你正在經歷的開始", en: "Start where you are" })}
+          </div>
+          <h2 className="display-l serif" style={{marginBottom: 40}}>
+            {t(lang, {
+              zh: "今天，你心裡裝著什麼？",
+              en: "What is in your heart today?",
+            })}
+          </h2>
+          <div className="topic-cloud">
+            {CONTENT.topics.map((tp, i) => (
+              <a href="#/library" onClick={(e)=>{e.preventDefault();navigate("library");}} key={i} className="topic-chip">
+                {lang === "en" ? tp.en : tp.zh}
+                <span className="num">{String(12 + i*7).padStart(2,"0")}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIES */}
+      <section className="ig-section">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow" style={{marginBottom: 12}}>
+                {t(lang, { zh: "Instagram · @dao.insight.pastorgary", en: "Instagram · @dao.insight.pastorgary" })}
+              </div>
+              <h2 className="display-l serif">
+                {t(lang, { zh: "每天，一句經文。", en: "Each day, one verse." })}
+              </h2>
+            </div>
+            <a href="https://www.instagram.com/dao.insight.pastorgary" target="_blank" rel="noopener" className="btn btn-ghost">
+              {t(lang, { zh: "在 Instagram 追蹤", en: "Follow on Instagram" })} →
+            </a>
+          </div>
+          <div className="ig-grid">
+            {CONTENT.igPosts.map((p, i) => (
+              <a key={i} href="https://www.instagram.com/dao.insight.pastorgary" target="_blank" rel="noopener" className="ig-tile">
+                <PhotoPlaceholder kind={p.bg} aspect="1/1" overlay={true} />
+                <div className="ig-art">
+                  <div>
+                    <div className="verse">{lang === "en" ? p.verse_en : p.verse_zh}</div>
+                    <div className="ref">{p.ref}</div>
+                  </div>
+                </div>
+                <div className="meta-bar">
+                  <span>♡ {p.likes}</span>
+                  <span>{p.days}{t(lang, { zh: "天前", en: "d ago" })}</span>
+                </div>
+                <div className="ig-overlay">
+                  {t(lang, { zh: "在 Instagram 上查看 →", en: "View on Instagram →" })}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIES */}
+      <section className="testimony-section">
+        <div className="container">
+          <div style={{textAlign:"center", marginBottom: 24}}>
+            <div className="eyebrow">{t(lang, { zh: "讀者來信", en: "From our readers" })}</div>
+          </div>
+          <div className="testimony-grid">
+            {CONTENT.testimonies.map((tm, i) => (
+              <div key={i} className={"testimony-card " + (lang==="en"?"en":"")}>
+                <blockquote>{bi(tm, lang, "quote")}</blockquote>
+                <div className="who">
+                  <span className="avatar">{(bi(tm, lang, "name"))[0]}</span>
+                  <span>
+                    <strong style={{color:"var(--ink)", fontWeight:500}}>{bi(tm, lang, "name")}</strong>
+                    <span style={{margin:"0 8px", color:"var(--ink-faint)"}}>·</span>
+                    {bi(tm, lang, "role")}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Newsletter lang={lang} />
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   TODAY (Daily Devotion)
+   ---------------------------------------------------------- */
+function TodayPage({ lang, navigate }) {
+  const [activeIdx, setActiveIdx] = _us(0);
+  const verse = CONTENT.dailyVerses[activeIdx];
+  const today = new Date(2026, 3, 28); // April 28, 2026 - Tue
+
+  const weekDays = [
+    { num: 26, name_zh: "日", name_en: "Sun", off: -2 },
+    { num: 27, name_zh: "一", name_en: "Mon", off: -1 },
+    { num: 28, name_zh: "二", name_en: "Tue", off: 0, today: true },
+    { num: 29, name_zh: "三", name_en: "Wed", off: 1 },
+    { num: 30, name_zh: "四", name_en: "Thu", off: 2 },
+    { num: 1,  name_zh: "五", name_en: "Fri", off: 3 },
+    { num: 2,  name_zh: "六", name_en: "Sat", off: 4 },
+  ];
+
+  const prompts_zh = [
+    "今天的這節經文，最先觸動你的是哪個字？為什麼？",
+    "如果你誠實地告訴神你今天的狀態，會說什麼？",
+    "在接下來的二十四小時裡，你願意嘗試把這節經文活出來嗎？以哪個小行動？",
+  ];
+  const prompts_en = [
+    "Which word in today's verse touched you first—and why?",
+    "If you honestly told God how you are today, what would you say?",
+    "In the next twenty-four hours, what one small act might let this verse become flesh?",
+  ];
+
+  return (
+    <div className="page today-page">
+      <div className="container">
+        <div className="today-hero">
+          <div className="image-side">
+            <PhotoPlaceholder kind={verse.img} aspect="auto" />
+          </div>
+          <div className="text-side">
+            <div className="today-date">
+              <span className="day">28</span>
+              <div>
+                <div className="month-year">April · 2026</div>
+                <div style={{fontFamily:"var(--serif)", fontStyle:"italic", color:"var(--ink-mute)", fontSize:15, marginTop:4}}>
+                  {t(lang, { zh: "星期二 · 復活期第三週", en: "Tuesday · 3rd week of Easter" })}
+                </div>
+              </div>
+            </div>
+            <div className="today-verse-ref">
+              {bi(verse, lang, "ref")} · {t(lang, { zh: "和修版", en: "RCUV" })}
+            </div>
+            <div className="today-verse">
+              <span className="verse-num">10</span>
+              {bi(verse, lang, "verse")}
+            </div>
+            <div className="today-actions">
+              <button className="today-action-btn" title="Listen">▷</button>
+              <button className="today-action-btn" title="Save">♡</button>
+              <button className="today-action-btn" title="Share">↗</button>
+              <button className="today-action-btn" title="Copy">⎘</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="today-reflection">
+          <div className="label">{t(lang, { zh: "默想", en: "Reflection" })}</div>
+          <div className="text">
+            <p>{bi(verse, lang, "reflection")}</p>
+            <p>
+              {t(lang, {
+                zh: "「休息」這個詞，在希伯來文裡有「鬆手」的意思。鬆開你緊握的計劃，鬆開你想證明的事，鬆開你以為自己必須背負的世界。然後，才有空間讓神成為神。",
+                en: "The Hebrew word for \"be still\" carries the sense of letting go—loosening your grip on plans, on what you must prove, on the world you think you have to carry. Only then is there room for God to be God.",
+              })}
+            </p>
+          </div>
+        </div>
+
+        <div className="today-prompts">
+          <h3>{t(lang, { zh: "今日默想題", en: "Prompts for today" })}</h3>
+          <ol>
+            {(lang === "en" ? prompts_en : prompts_zh).map((p, i) => (
+              <li key={i}>{p}</li>
+            ))}
+          </ol>
+        </div>
+
+        <div style={{marginTop: 64}}>
+          <div className="eyebrow" style={{marginBottom:16}}>{t(lang, { zh: "本週靈修", en: "This week" })}</div>
+          <div className="today-week-strip">
+            {weekDays.map((d, i) => (
+              <div key={i} className={"day-cell" + (d.today?" today":"")}>
+                <div className="num">{d.num}</div>
+                <div className="name">{lang==="en" ? d.name_en : d.name_zh}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{marginTop: 64, display:"flex", gap:16, justifyContent:"center"}}>
+          {CONTENT.dailyVerses.map((_, i) => (
+            <button key={i} onClick={()=>setActiveIdx(i)} style={{
+              width: i===activeIdx?32:8, height: 8, borderRadius: 4,
+              background: i===activeIdx?"var(--ink)":"var(--line)",
+              transition: "all 0.3s"
+            }} aria-label={"Sample verse " + (i+1)} />
+          ))}
+        </div>
+      </div>
+
+      <Newsletter lang={lang} />
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   READ (Bible)
+   ---------------------------------------------------------- */
+function ReadPage({ lang, navigate }) {
+  const psalm46_zh = [
+    {n:1, text:"神是我們的避難所，是我們的力量，是我們在患難中隨時的幫助。"},
+    {n:2, text:"所以，地雖改變，山雖搖動到海心，"},
+    {n:3, text:"其中的水雖澎湃翻騰，山雖因海漲而戰抖，我們也不害怕。"},
+    {n:4, text:"有一道河，這河的分汊使神的城歡喜，這城就是至高者居住的聖所。"},
+    {n:5, text:"神在其中，城必不動搖；到天一亮，神必幫助這城。"},
+    {n:6, text:"萬邦喧嚷，國度動搖；神出聲，地便熔化。"},
+    {n:7, text:"萬軍之耶和華與我們同在，雅各的神是我們的避難所。"},
+    {n:8, text:"你們來看耶和華的作為，看他使地荒涼的事。"},
+    {n:9, text:"他止息戰爭，直到地極；他折弓、斷槍，把戰車焚燒在火中。"},
+    {n:10, text:"你們要休息，要知道我是神！我必在列國中受尊崇，在全地也受尊崇。", highlight: true},
+    {n:11, text:"萬軍之耶和華與我們同在，雅各的神是我們的避難所。"},
+  ];
+  const psalm46_en = [
+    {n:1, text:"God is our refuge and strength, an ever-present help in trouble."},
+    {n:2, text:"Therefore we will not fear, though the earth give way and the mountains fall into the heart of the sea,"},
+    {n:3, text:"though its waters roar and foam and the mountains quake with their surging."},
+    {n:4, text:"There is a river whose streams make glad the city of God, the holy place where the Most High dwells."},
+    {n:5, text:"God is within her, she will not fall; God will help her at break of day."},
+    {n:6, text:"Nations are in uproar, kingdoms fall; he lifts his voice, the earth melts."},
+    {n:7, text:"The LORD Almighty is with us; the God of Jacob is our fortress."},
+    {n:8, text:"Come and see what the LORD has done, the desolations he has brought on the earth."},
+    {n:9, text:"He makes wars cease to the ends of the earth. He breaks the bow and shatters the spear; he burns the shields with fire."},
+    {n:10, text:"He says, \"Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.\"", highlight: true},
+    {n:11, text:"The LORD Almighty is with us; the God of Jacob is our fortress."},
+  ];
+  const verses = lang === "en" ? psalm46_en : psalm46_zh;
+
+  const books_zh = ["創世記", "出埃及記", "詩篇", "箴言", "以賽亞書", "馬太福音", "馬可福音", "路加福音", "約翰福音", "羅馬書"];
+  const books_en = ["Genesis", "Exodus", "Psalms", "Proverbs", "Isaiah", "Matthew", "Mark", "Luke", "John", "Romans"];
+  const books = lang === "en" ? books_en : books_zh;
+
+  return (
+    <div className="page read-page">
+      <div className="container">
+        <div className="read-layout">
+          {/* sidebar */}
+          <aside className="read-sidebar">
+            <input className="read-search" placeholder={t(lang, { zh: "搜尋經卷或關鍵字", en: "Search book or word" })} />
+            <h4>{t(lang, { zh: "舊約", en: "Old Testament" })}</h4>
+            <ul>
+              {books.slice(0,5).map((b,i) => (
+                <li key={i} className={i===2?"active":""}>{b}</li>
+              ))}
+            </ul>
+            <h4>{t(lang, { zh: "新約", en: "New Testament" })}</h4>
+            <ul>
+              {books.slice(5).map((b,i) => <li key={i}>{b}</li>)}
+            </ul>
+          </aside>
+
+          {/* main */}
+          <main className="read-content">
+            <div className="read-chapter-head">
+              <h1>{t(lang, { zh: "詩篇", en: "Psalms" })} <em>46</em></h1>
+              <span className="version">{t(lang, { zh: "和合本修訂版", en: "RCUV" })}</span>
+            </div>
+
+            <p style={{fontFamily:"var(--serif)", fontStyle:"italic", color:"var(--ink-mute)", marginBottom: "var(--s4)", fontSize:15}}>
+              {t(lang, {
+                zh: "可拉後裔的詩歌，交給聖詠團長，調用「女音」。",
+                en: "For the director of music. Of the Sons of Korah. According to alamoth. A song.",
+              })}
+            </p>
+
+            {verses.map(v => (
+              <p key={v.n} className={"read-verse" + (v.highlight ? " highlighted" : "")}>
+                <span className="vnum">{v.n}</span>
+                {v.text}
+              </p>
+            ))}
+
+            <div className="chapter-nav">
+              <a href="#">← {t(lang, { zh: "詩篇 45", en: "Psalm 45" })}</a>
+              <a href="#">{t(lang, { zh: "詩篇 47", en: "Psalm 47" })} →</a>
+            </div>
+          </main>
+
+          {/* aside */}
+          <aside className="read-aside">
+            <h4>{t(lang, { zh: "今日重點", en: "Today's focus" })}</h4>
+            <div className="read-aside-card">
+              <div className="ref">v.10</div>
+              <p>{t(lang, {
+                zh: "「休息」原文有「鬆手」之意——不是怠惰，而是把世界交還給神的姿態。",
+                en: "\"Be still\" carries the sense of letting go—not idleness, but the posture of returning the world to God.",
+              })}</p>
+            </div>
+            <div className="read-aside-card">
+              <div className="ref">{t(lang, { zh: "對照", en: "Cross-ref" })}</div>
+              <p>{t(lang, {
+                zh: "出 14:14；賽 30:15；可 4:39。當神說「靜了吧」，風浪聽從。",
+                en: "Ex 14:14; Isa 30:15; Mk 4:39. When God says \"peace,\" the storm listens.",
+              })}</p>
+            </div>
+            <div className="read-aside-card">
+              <div className="ref">{t(lang, { zh: "歷史背景", en: "Context" })}</div>
+              <p>{t(lang, {
+                zh: "傳統認為此詩寫於希西家王時期亞述軍兵臨城下之際——一首在恐懼中唱出的安息之歌。",
+                en: "Traditionally placed in Hezekiah's day, with Assyrian armies at the gate—a song of rest sung in the throat of fear.",
+              })}</p>
+            </div>
+            <button className="btn" style={{width:"100%", marginTop:24, justifyContent:"center"}}>
+              {t(lang, { zh: "加入讀經計劃", en: "Add to reading plan" })}
+            </button>
+          </aside>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   LIBRARY
+   ---------------------------------------------------------- */
+function LibraryPage({ lang, navigate }) {
+  const filters_zh = ["全部", "靈修札記", "聖經研究", "聖經導論", "神學思想"];
+  const filters_en = ["All", "Devotional", "Bible Study", "Introduction", "Theology"];
+  const filters = lang === "en" ? filters_en : filters_zh;
+  const [active, setActive] = _us(0);
+
+  return (
+    <div className="page library-page">
+      <div className="container">
+        <header className="library-hero">
+          <div className="eyebrow" style={{marginBottom: 16}}>{t(lang, { zh: "文字 · 慢讀 · 學術 × 牧養", en: "Words · Slow read · Scholarly × Pastoral" })}</div>
+          <h1>
+            {t(lang, {
+              zh: <>慢慢讀，<br/>讓<em>一段話</em>留下來。</>,
+              en: <>Read slowly,<br/>let <em>one sentence</em> stay.</>,
+            })}
+          </h1>
+          <p>{t(lang, {
+            zh: "這裡收藏的，不是答案，而是同行者寫下的句子——關於信仰、生活、軟弱與恩典。",
+            en: "What lives here are not answers, but sentences from fellow travelers—on faith, life, weakness, and grace.",
+          })}</p>
+        </header>
+
+        <div className="library-filters">
+          {filters.map((f, i) => (
+            <button key={i} className={"library-filter" + (i===active?" active":"")} onClick={()=>setActive(i)}>{f}</button>
+          ))}
+        </div>
+
+        <div className="article-grid-3">
+          {CONTENT.articles.map(a => (
+            <ArticleCard key={a.id} article={a} lang={lang} navigate={navigate} />
+          ))}
+          {CONTENT.articles.slice(0,2).map(a => (
+            <ArticleCard key={a.id+"-b"} article={{...a, id: a.id+"-b"}} lang={lang} navigate={navigate} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   ARTICLE (single)
+   ---------------------------------------------------------- */
+function ArticlePage({ lang, navigate, articleId }) {
+  const article = CONTENT.articles.find(a => articleId && articleId.startsWith(a.id)) || CONTENT.articles[0];
+
+  const body_zh = (
+    <>
+      <p className="lead">那天晚上你回到家，鞋子還沒脫，就坐在玄關的地板上。手機在口袋裡震，孩子在房間裡叫，有一封信還沒回。你閉上眼睛，問了一個沒有對誰問的問題：神，你在哪裡？</p>
+      <p>我們時常以為，疲倦是信心軟弱的證據。如果我夠相信，就不會這麼累。如果我禱告夠多，就不會這麼空。於是疲倦本身，變成了我們的羞愧。</p>
+      <p>但聖經並不這樣說話。</p>
+      <p className="pull">疲倦不是信心的反義詞，疲倦是身體最誠實的禱告。</p>
+      <h2>以利亞坐在羅騰樹下</h2>
+      <p>列王紀上十九章，先知以利亞在剛剛打了一場大勝仗之後——那是他職業生涯的高峰，他在迦密山叫火從天降下——他逃到曠野，坐在一棵羅騰樹下，向神求死。</p>
+      <p>神沒有責備他。神沒有說，你怎麼這麼沒信心？神做了一件很安靜的事：祂讓他睡覺，叫天使送來餅和水，讓他再睡一覺。然後才在微小的聲音裡與他說話。</p>
+      <blockquote>有時候，最屬靈的回應，是先睡一覺。</blockquote>
+      <h2>耶穌也累過</h2>
+      <p>馬可福音記載，耶穌曾在船尾枕著枕頭睡著。風暴來了，門徒慌了，祂還在睡。神成為人的時候，祂也讓自己疲倦——這是道成肉身一個常被忽略的細節。</p>
+      <p>所以，今晚，如果你坐在玄關的地板上太久了，請容我把這句話放在你手心：</p>
+      <p style={{fontFamily:"var(--serif-display)", fontStyle:"italic", fontSize:28, color:"var(--accent)", textAlign:"center", marginTop:48}}>
+        神不在你撐住的地方，<br/>祂在你終於放下的地方等你。
+      </p>
+    </>
+  );
+
+  const body_en = (
+    <>
+      <p className="lead">You came home that night and didn't even take off your shoes—just sat on the floor by the door. Your phone buzzed in your pocket, your child called from the next room, an email still unanswered. You closed your eyes and asked, to no one in particular: God, where are you?</p>
+      <p>We often assume tiredness is evidence of weak faith. If I believed enough, I wouldn't be this exhausted. If I prayed enough, I wouldn't feel this hollow. And so the tiredness itself becomes a source of shame.</p>
+      <p>But scripture does not speak this way.</p>
+      <p className="pull">Tiredness is not the opposite of faith. Tiredness is the body's most honest prayer.</p>
+      <h2>Elijah Under the Broom Tree</h2>
+      <p>In 1 Kings 19, Elijah—right after the greatest victory of his career, after calling fire down on Mount Carmel—flees into the desert, sits beneath a broom tree, and asks God to let him die.</p>
+      <p>God does not rebuke him. God does not say, "Where is your faith?" God does something very quiet: He lets him sleep. Sends an angel with bread and water. Lets him sleep again. And only then, in a small voice, does He speak.</p>
+      <blockquote>Sometimes the most spiritual response is to sleep first.</blockquote>
+      <h2>Jesus Was Tired Too</h2>
+      <p>Mark records that Jesus once slept on a cushion at the back of the boat. The storm came, the disciples panicked, and He kept sleeping. When God became human, He let Himself grow tired too—an often-overlooked detail of the incarnation.</p>
+      <p>So tonight, if you have been sitting on the floor by your door too long, let me place this sentence in your palm:</p>
+      <p style={{fontFamily:"var(--serif-display)", fontStyle:"italic", fontSize:28, color:"var(--accent)", textAlign:"center", marginTop:48}}>
+        God is not where you keep holding on.<br/>He waits where you finally let go.
+      </p>
+    </>
+  );
+
+  return (
+    <div className="page article-page">
+      <div className="container">
+        <header className="article-hero">
+          <div className="crumb">{bi(article, lang, "cat")}</div>
+          <h1 className="serif">{bi(article, lang, "title")}</h1>
+          <div className="deck">{bi(article, lang, "excerpt")}</div>
+          <div className="meta">
+            <span>{t(lang, CONTENT.ui.by)} · {bi(article, lang, "author")}</span>
+            <span className="sep">·</span>
+            <span className="tnum">{article.date}</span>
+            <span className="sep">·</span>
+            <span>{article.readtime} {t(lang, CONTENT.ui.minutes)}</span>
+          </div>
+        </header>
+
+        <div className="article-feature-image">
+          <PhotoPlaceholder kind={article.img} aspect="16/9" />
+        </div>
+
+        <article className="article-body">
+          {lang === "en" ? body_en : body_zh}
+        </article>
+
+        <div style={{maxWidth:660, margin:"64px auto 0", paddingTop:32, borderTop:"1px solid var(--line)", display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+          <div style={{fontSize:13, color:"var(--ink-mute)", letterSpacing:"0.04em"}}>
+            {t(lang, { zh: "若這篇文章對你有幫助", en: "If this helped you" })}
+          </div>
+          <div style={{display:"flex", gap:8}}>
+            <button className="today-action-btn" title="Save">♡</button>
+            <button className="today-action-btn" title="Share">↗</button>
+          </div>
+        </div>
+
+        <section style={{marginTop: 96}}>
+          <div className="eyebrow" style={{marginBottom: 24}}>
+            {t(lang, { zh: "繼續閱讀", en: "Continue reading" })}
+          </div>
+          <div className="article-grid-3">
+            {CONTENT.articles.filter(a => a.id !== article.id).slice(0,3).map(a => (
+              <ArticleCard key={a.id} article={a} lang={lang} navigate={navigate} />
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <Newsletter lang={lang} />
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   SERIES (4 IG series mirrored on web)
+   ---------------------------------------------------------- */
+function SeriesPage({ lang, navigate }) {
+  return (
+    <div className="page intro-page">
+      <div className="container">
+        <header className="series-page-hero">
+          <div className="eyebrow" style={{marginBottom: 16}}>
+            {t(lang, { zh: "系列 · Series", en: "Series" })}
+          </div>
+          <h1>
+            {t(lang, {
+              zh: <>四個系列，<br/>四種<em>進入聖經</em>的方式。</>,
+              en: <>Four series,<br/>four ways <em>into scripture</em>.</>,
+            })}
+          </h1>
+          <p>
+            {t(lang, {
+              zh: "從 Instagram 開始的內容，在這裡有了一個永久的家。已完結的可以從頭讀起，連載中的可以一起跟下去。",
+              en: "Content that began on Instagram now has a permanent home. Read completed series from the start; follow ongoing ones week by week.",
+            })}
+          </p>
+        </header>
+
+        <div className="series-detail-grid">
+          {CONTENT.series.map((s, i) => (
+            <div key={s.id} className="series-detail">
+              <div className="visual">
+                <PhotoPlaceholder kind={s.img} aspect="1/1" />
+              </div>
+              <div className="body">
+                <span className={"series-badge " + s.status} style={{marginBottom: 16}}>
+                  <span className="dot"></span>
+                  {s.status === "ongoing"
+                    ? t(lang, { zh: "連載中", en: "Ongoing" })
+                    : t(lang, { zh: "已完結", en: "Completed" })}
+                </span>
+                <h2>
+                  {bi(s, lang, "title").split("").map((c, ci) =>
+                    ci === 0 ? <em key={ci}>{c}</em> : c
+                  )}
+                </h2>
+                <div className="tagline">「{bi(s, lang, "tagline")}」</div>
+                <p>{bi(s, lang, "desc")}</p>
+                <div className="stats">
+                  <div className="stat">
+                    <div className="num">{s.count}</div>
+                    <div className="lbl">{t(lang, { zh: "篇 / 集", en: "Episodes" })}</div>
+                  </div>
+                  {s.total && (
+                    <div className="stat">
+                      <div className="num">{s.total}</div>
+                      <div className="lbl">{t(lang, { zh: "預計總數", en: "Planned total" })}</div>
+                    </div>
+                  )}
+                  <div className="stat">
+                    <div className="num" style={{fontFamily:"var(--serif)", fontStyle:"normal", fontSize:18, color:"var(--ink)", paddingTop:10}}>{bi(s, lang, "format")}</div>
+                    <div className="lbl">{t(lang, { zh: "形式", en: "Format" })}</div>
+                  </div>
+                </div>
+                {s.total && (
+                  <div className="progress" style={{marginBottom: 24}}>
+                    <div className="progress-fill" style={{width: (s.count/s.total*100)+"%"}}></div>
+                  </div>
+                )}
+                <div style={{display:"flex", gap:12, flexWrap:"wrap"}}>
+                  <a href="#/library" onClick={(e)=>{e.preventDefault();navigate("library");}} className="btn btn-solid">
+                    {t(lang, { zh: "閱讀全部 →", en: "Read all →" })}
+                  </a>
+                  <a href="https://www.instagram.com/dao.insight.pastorgary" target="_blank" rel="noopener" className="btn btn-ghost">
+                    {t(lang, { zh: "在 Instagram 看", en: "View on Instagram" })}
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   BIBLE INTRO (66 books index)
+   ---------------------------------------------------------- */
+function IntroPage({ lang, navigate }) {
+  const [tab, setTab] = _us("OT");
+  const sections = CONTENT.bibleBooks[tab];
+  const psalmsSeries = CONTENT.series.find(s => s.id === "psalms-weekly");
+  const otCount = CONTENT.bibleBooks.OT.reduce((a,s) => a + s.books.length, 0);
+  const ntCount = CONTENT.bibleBooks.NT.reduce((a,s) => a + s.books.length, 0);
+  const otPub = CONTENT.bibleBooks.OT.reduce((a,s) => a + s.books.filter(b=>b.pub).length, 0);
+  const ntPub = CONTENT.bibleBooks.NT.reduce((a,s) => a + s.books.filter(b=>b.pub).length, 0);
+
+  return (
+    <div className="page intro-page">
+      <div className="container">
+        <header className="intro-hero">
+          <div className="eyebrow" style={{marginBottom: 16}}>
+            {t(lang, { zh: "聖經導論 · Bible Introduction", en: "Bible Introduction" })}
+          </div>
+          <h1>
+            {t(lang, {
+              zh: <>六十六卷書，<br/>每一卷都有<em>一道入口</em>。</>,
+              en: <>Sixty-six books,<br/>each with <em>a way in</em>.</>,
+            })}
+          </h1>
+          <p>
+            {t(lang, {
+              zh: "在開始讀一卷書之前，先認識它的作者、年代、結構與主題。願這些導論文章，成為你進入聖經的一道小窗。",
+              en: "Before reading a book, first meet its author, era, structure, and themes. May these introductions be a small window into scripture.",
+            })}
+          </p>
+        </header>
+
+        <div className="intro-tab-bar">
+          <button className={"intro-tab" + (tab==="OT"?" active":"")} onClick={()=>setTab("OT")}>
+            {t(lang, { zh: "舊約", en: "Old Testament" })}
+            <span className="count">{otPub}/{otCount}</span>
+          </button>
+          <button className={"intro-tab" + (tab==="NT"?" active":"")} onClick={()=>setTab("NT")}>
+            {t(lang, { zh: "新約", en: "New Testament" })}
+            <span className="count">{ntPub}/{ntCount}</span>
+          </button>
+          <div style={{marginLeft:"auto", fontSize:13, color:"var(--ink-mute)", alignSelf:"center", display:"flex", alignItems:"center", gap:20}}>
+            <span style={{display:"inline-flex", alignItems:"center", gap:8}}>
+              <span style={{width:8,height:8,borderRadius:"50%",background:"var(--accent)"}} />
+              {t(lang, { zh: "已發佈導論", en: "Published" })}
+            </span>
+            <span style={{display:"inline-flex", alignItems:"center", gap:8}}>
+              <span style={{width:8,height:8,borderRadius:"50%",background:"var(--ink-faint)"}} />
+              {t(lang, { zh: "撰寫中", en: "In progress" })}
+            </span>
+          </div>
+        </div>
+
+        {sections.map((sec, si) => (
+          <React.Fragment key={si}>
+          {tab === "OT" && si === 2 && (
+            <div className="psalms-progress">
+              <div className="head">
+                <h3>{t(lang, { zh: "每週詩篇連載中", en: "Psalms Weekly · ongoing" })}</h3>
+                <div className="progress-num">{psalmsSeries.count}<span className="total">/{psalmsSeries.total}</span></div>
+              </div>
+              <div className="bar"><div className="bar-fill" style={{width: (psalmsSeries.count/psalmsSeries.total*100)+"%"}}></div></div>
+              <p>
+                {t(lang, {
+                  zh: "從詩篇 1 篇開始，每週一首慢讀釋經。預計三年完成全部 150 篇。",
+                  en: "Starting from Psalm 1, one psalm each week. A three-year journey through all 150.",
+                })}
+                <a href="#/series" onClick={(e)=>{e.preventDefault();navigate("series");}} style={{marginLeft:8, color:"var(--accent)", borderBottom:"1px solid var(--accent)"}}>
+                  {t(lang, { zh: "認識這個系列 →", en: "About this series →" })}
+                </a>
+              </p>
+            </div>
+          )}
+          <div className="intro-section">
+            <div style={{display:"flex", alignItems:"baseline", justifyContent:"space-between", borderBottom:"1px solid var(--line-soft)", paddingBottom:16, marginBottom:24}}>
+              <h2 style={{fontFamily:"var(--serif)", fontSize:26, fontWeight:400, letterSpacing:"-0.005em"}}>
+                <span style={{color:"var(--accent)", fontStyle:"italic", fontFamily:"var(--serif-display)", marginRight:14}}>{String(si+1).padStart(2,"0")}</span>
+                {bi(sec, lang, "sec")}
+              </h2>
+              <span style={{fontSize:11, letterSpacing:"0.18em", color:"var(--ink-mute)", textTransform:"uppercase"}}>
+                {sec.books.length} {t(lang, { zh: "卷", en: "books" })}
+              </span>
+            </div>
+            <div className="book-grid">
+              {sec.books.map(b => (
+                <a
+                  key={b.n}
+                  href={b.pub ? "#/article/intro-" + b.en.toLowerCase().replace(/ /g,"-") : "#"}
+                  onClick={(e) => {
+                    if (!b.pub) { e.preventDefault(); return; }
+                    e.preventDefault();
+                    navigate("article", "intro-" + b.en.toLowerCase());
+                  }}
+                  className={"book-card" + (b.pub?" published":"")}
+                  style={{cursor: b.pub?"pointer":"default"}}
+                >
+                  <div className="book-num">№ {String(b.n).padStart(2,"0")}</div>
+                  <div className="book-name">{lang==="en" ? b.en : b.zh}</div>
+                  <div className="book-en">{lang==="en" ? "" : b.en}</div>
+                  <div className="book-status">
+                    {b.pub
+                      ? t(lang, { zh: "讀導論 →", en: "Read intro →" })
+                      : t(lang, { zh: "即將推出", en: "Coming soon" })}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+          </React.Fragment>
+        ))}
+
+        <div style={{marginTop: 96, padding: "var(--s5)", background:"var(--paper-2)", textAlign:"center", borderRadius:"var(--radius)"}}>
+          <div className="eyebrow" style={{marginBottom:12}}>
+            {t(lang, { zh: "建議讀法", en: "How to read" })}
+          </div>
+          <h3 style={{fontFamily:"var(--serif)", fontSize:28, fontWeight:400, marginBottom:12}}>
+            {t(lang, {
+              zh: "從導論開始，再進入經文。",
+              en: "Begin with the introduction, then the text.",
+            })}
+          </h3>
+          <p style={{fontFamily:"var(--serif)", fontSize:17, color:"var(--ink-soft)", maxWidth:560, margin:"0 auto", lineHeight:1.6}}>
+            {t(lang, {
+              zh: "每篇導論約八到十分鐘可讀完，幫助你掌握這卷書的歷史背景、文學結構、神學主題，再進入逐章閱讀，會看見更多細節。",
+              en: "Each introduction takes 8–10 minutes—covering historical context, literary structure, and theological themes—so that when you enter the text chapter by chapter, you'll see more.",
+            })}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   ABOUT
+   ---------------------------------------------------------- */
+function AboutPage({ lang, navigate }) {
+  return (
+    <div className="page">
+      <div className="container">
+        <header className="about-hero">
+          <div className="eyebrow" style={{marginBottom: 16}}>{t(lang, { zh: "關於 daoinsight", en: "About daoinsight" })}</div>
+          <h1>{t(lang, {
+            zh: <>嗨，我是<br/><em>Pastor Gary</em>。</>,
+            en: <>Hi, I'm<br/><em>Pastor Gary</em>.</>,
+          })}</h1>
+          <p style={{maxWidth:580, margin:"24px auto 0", fontFamily:"var(--serif)", fontStyle:"italic", fontSize:19, color:"var(--ink-mute)", lineHeight:1.55}}>
+            {t(lang, {
+              zh: "一位牧者，在學術與靈修之間寫字。daoinsight 是我為所有對聖經、神學有興趣的人開設的閱讀空間。",
+              en: "A pastor who writes between the academy and the prayer closet. daoinsight is a reading space I made for anyone curious about scripture and theology.",
+            })}
+          </p>
+          <p style={{maxWidth:600, margin:"32px auto 0", fontFamily:"var(--serif)", fontSize:21, lineHeight:1.6, color:"var(--ink-soft)"}}>
+            {t(lang, {
+              zh: "daoinsight 是我私人開設的一個慢讀空間。不屬於任何宗派，不為任何門牆代言——只想陪你，在忙碌的日子裡，重新打開聖經。",
+              en: "daoinsight is a slow reading space I started on my own. It belongs to no denomination and speaks for no walled garden—I simply want to walk with you, opening scripture again, in the middle of busy days.",
+            })}
+          </p>
+        </header>
+
+        <div style={{margin: "64px 0"}}>
+          <PhotoPlaceholder kind="window" aspect="16/8" />
+        </div>
+
+        <section className="about-section">
+          <div><div className="label">01</div></div>
+          <div>
+            <h2 className="serif">{t(lang, { zh: "為什麼是「道」？", en: "Why dao?" })}</h2>
+            <p>{t(lang, {
+              zh: "約翰福音第一章說，太初有道，道與神同在，道就是神。在中文裡，「道」既是言語、是真理、也是路。我相信，聖經不只是文字，而是一條可以走進去的路。",
+              en: "The first chapter of John says, In the beginning was the Word, and the Word was with God, and the Word was God. In Chinese, dao means speech, truth, and a path. I believe scripture is not merely text, but a road one can walk into.",
+            })}</p>
+            <p>{t(lang, {
+              zh: "「insight」是看見裡面的東西。我希望這個網站做的事，不是給你更多資訊——而是讓你在某一句話裡停下來，然後看見一些原本就在那裡，只是被忙碌遮住的事物。",
+              en: "Insight is to see what is inside. I hope this site does not give you more information—but lets you pause at one sentence, and notice what was always there, only hidden behind busyness.",
+            })}</p>
+          </div>
+        </section>
+
+        <section className="about-section">
+          <div><div className="label">02</div></div>
+          <div>
+            <h2 className="serif">{t(lang, { zh: "這個網站給誰？", en: "Who is this for?" })}</h2>
+            <p>{t(lang, {
+              zh: "給對聖經和神學有興趣的所有人——無論你是受洗多年的弟兄姊妹、還沒進過教會的慕道朋友、或是曾經受過傷而離開的人。我相信，誠實的問題，比急著給的答案，更接近神。",
+              en: "For anyone curious about scripture and theology—whether you have been baptized for years, have never set foot in a church, or have been hurt and walked away. I believe an honest question is closer to God than a hurried answer.",
+            })}</p>
+            <p>{t(lang, {
+              zh: "我不替你回答所有問題。我陪你帶著問題，一段一段地讀下去。",
+              en: "I will not answer every question for you. I will walk with you, with your questions, passage by passage.",
+            })}</p>
+          </div>
+        </section>
+
+        <section className="about-section">
+          <div><div className="label">03</div></div>
+          <div>
+            <h2 className="serif">{t(lang, { zh: "在哪裡找到我", en: "Where to find me" })}</h2>
+            <p>{t(lang, {
+              zh: "我在 Instagram 上每天更新短語與默想。這個網站是更深一點的閱讀空間。歡迎寫信給我聊聊：hello@daoinsight.com",
+              en: "I post short reflections daily on Instagram. This site is for slightly deeper reading. Drop me a line anytime: hello@daoinsight.com",
+            })}</p>
+            <div style={{marginTop: 24, display:"flex", gap:12, flexWrap:"wrap"}}>
+              <a href="https://www.instagram.com/dao.insight.pastorgary" target="_blank" rel="noopener" className="btn">@dao.insight.pastorgary →</a>
+              <a href="mailto:hello@daoinsight.com" className="btn btn-ghost">{t(lang, { zh: "寫信給我", en: "Email me" })}</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <Newsletter lang={lang} />
+    </div>
+  );
+}
+
+Object.assign(window, { HomePage, TodayPage, ReadPage, LibraryPage, ArticlePage, AboutPage });
+
+/* ============================================================
+   daoinsight — App router & shell
+   ============================================================ */
+
+const { useState: us, useEffect: ue } = React;
+
+function parseHash() {
+  const h = window.location.hash || "#/";
+  const m = h.replace(/^#\//, "").split("/");
+  return { route: m[0] || "home", param: m[1] || null };
+}
+
+function App() {
+  const [lang, setLang] = us(() => localStorage.getItem("daoinsight.lang") || "zh");
+  const [{ route, param }, setLoc] = us(parseHash());
+
+  ue(() => {
+    const onHash = () => {
+      setLoc(parseHash());
+      window.scrollTo({ top: 0, behavior: "instant" });
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  ue(() => {
+    localStorage.setItem("daoinsight.lang", lang);
+    document.documentElement.lang = lang === "en" ? "en" : "zh-Hant";
+  }, [lang]);
+
+  const navigate = (r, p) => {
+    window.location.hash = "#/" + r + (p ? "/" + p : "");
+  };
+
+  let page;
+  switch (route) {
+    case "today":   page = <TodayPage lang={lang} navigate={navigate} />; break;
+    case "read":    page = <ReadPage lang={lang} navigate={navigate} />; break;
+    case "library": page = <LibraryPage lang={lang} navigate={navigate} />; break;
+    case "series":  page = <SeriesPage lang={lang} navigate={navigate} />; break;
+    case "article": page = <ArticlePage lang={lang} navigate={navigate} articleId={param} />; break;
+    case "intro":   page = <IntroPage lang={lang} navigate={navigate} />; break;
+    case "about":   page = <AboutPage lang={lang} navigate={navigate} />; break;
+    case "home":
+    default:        page = <HomePage lang={lang} navigate={navigate} />; break;
+  }
+
+  // Map article→library for active nav state
+  const navRoute = route === "article" ? "library" : route;
+
+  return (
+    <div className={lang === "en" ? "lang-en" : "lang-zh"}>
+      <Nav route={navRoute} lang={lang} setLang={setLang} navigate={navigate} />
+      <main key={route + (param || "")}>{page}</main>
+      <Footer lang={lang} navigate={navigate} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+</script>
+</body>
+</html>
