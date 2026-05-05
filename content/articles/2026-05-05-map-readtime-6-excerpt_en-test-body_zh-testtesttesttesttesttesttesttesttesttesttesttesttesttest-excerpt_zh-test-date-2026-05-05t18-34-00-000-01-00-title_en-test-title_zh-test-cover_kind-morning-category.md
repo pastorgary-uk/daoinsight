@@ -8,4 +8,5 @@ excerpt_zh: test
 excerpt_en: test
 readtime: 6
 body_zh: testtesttesttesttesttesttesttesttesttesttesttesttesttest
+body_en: testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
 ---
